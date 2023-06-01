@@ -64,7 +64,7 @@ const Login = () => {
                                         </div>
                                     </div>
                                     <div className="col-4">
-                                        <button type="submit" className="btn btn-primary btn-block" onClick={login}>Sign In</button>
+                                        <button type="submit" className="btn btn-primary btn-block" onClick={login}>LogIn</button>
                                     </div>
                                 </div>
                         </div>
