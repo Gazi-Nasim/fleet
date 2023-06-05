@@ -21,7 +21,7 @@ const Parts_stock_in = () => {
     const getpartsName = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Partsin/get_partsName',
+            url: 'http://localhost/fleet/backend/Partsin/get_partsName',
             responseType: 'json'
         }).then(function (response) {
             setpartsName(response.data.Namelist)
@@ -34,7 +34,7 @@ const Parts_stock_in = () => {
 
     
     const getOnedata = () => {
-        axios.post('http://localhost/fleet_manage/backend/Partsin/editGet_stock', {
+        axios.post('http://localhost/fleet/backend/Partsin/editGet_stock', {
             id: p.id
         }, {
             headers: {
@@ -61,7 +61,7 @@ const Parts_stock_in = () => {
     }, [])
 
     const Update = () => {
-        axios.post('http://localhost/fleet_manage/backend/Partsin/update_stock_in', {
+        axios.post('http://localhost/fleet/backend/Partsin/update_stock_in', {
 
             id: id,
             parts_id: partsid,

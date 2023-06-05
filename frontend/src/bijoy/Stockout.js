@@ -17,7 +17,7 @@ const Stockout = () => {
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Parts/get_parts',
+            url: 'http://localhost/fleet/backend/Parts/get_parts',
             responseType: 'json'
         }).then(function (response) {
             setparts(response.data.list)
@@ -30,7 +30,7 @@ const Stockout = () => {
 
     const save = () => {
 
-        axios.post('http://localhost/fleet_manage/backend/Parts/add_stock_out', {
+        axios.post('http://localhost/fleet/backend/Parts/add_stock_out', {
 
             parts_id: id,
             qty: qty,
@@ -56,7 +56,7 @@ const Stockout = () => {
     const getparts = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Parts/get_stock_out',
+            url: 'http://localhost/fleet/backend/Parts/get_stock_out',
             responseType: 'json'
         }).then(function (response) {
             setstocklist(response.data.stock_out)
@@ -68,7 +68,7 @@ const Stockout = () => {
     }, []);
 
     const deleteparts = (id) => {
-        axios.post('http://localhost/fleet_manage/backend/Parts/deleteparts', {
+        axios.post('http://localhost/fleet/backend/Parts/deleteparts', {
             id: id
         }, {
             headers: {

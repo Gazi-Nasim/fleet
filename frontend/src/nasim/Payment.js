@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 import Menu from '../Menu';
 
-export default function Payment() {
+const Payment = () => {
 
     const [Vnm, setVehi] = useState([]);
     const [Vname, setVehiNM] = useState('');
@@ -18,7 +18,7 @@ export default function Payment() {
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Payment_c/VehicleName',
+            url: 'http://localhost/fleet/backend/Payment_c/VehicleName',
             responseType: 'json'
         }).then(function (response) {
             let VnmN = response.data.vehicl;
@@ -39,7 +39,7 @@ export default function Payment() {
     }, []);
 
     const save = () => {
-        axios.post('http://localhost/fleet_manage/backend/Payment_c/saveVehi', {
+        axios.post('http://localhost/fleet/backend/Payment_c/saveVehi', {
 
             vehicle_id: Vname,
             trans_date: email,
@@ -67,12 +67,12 @@ export default function Payment() {
     const getPmnt = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Payment_c/pmntGet',
+            url: 'http://localhost/fleet/backend/Payment_c/pmntGet',
             responseType: 'json'
-        }).then(function (response) {            
+        }).then(function (response) {
             let pmnt = response.data.pmnts;
             setPmnts(pmnt);
-           console.log(pmnt);
+            console.log(pmnt);
         });
     }
 
@@ -82,7 +82,7 @@ export default function Payment() {
 
 
     const deletePemnt = (id) => {
-        axios.post('http://localhost/fleet_manage/backend/Payment_c/deletPmnt', {
+        axios.post('http://localhost/fleet/backend/Payment_c/deletPmnt', {
             id: id
         }, {
             headers: {
@@ -97,39 +97,10 @@ export default function Payment() {
 
     }
 
-    // const editPemnt = (id) => {
-    //     axios.post('http://localhost/fleet_manage/backend/Payment_c/editPmnt', {
-    //         id: id
-    //     }, {
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': localStorage.getItem('token')
-    //         }
-    //     }).then(function (response) {
-    //         let data = response.data;
-    //         setmsg(data.msg)
-    //         getdata()
-    //     }
-    //     )
-
-    // }
 
     const editPemnt = (id) => {
-        navigate('/editpay/' + id );
-        // setid(id)
-        // settype('update')
-        // axios.post('http://localhost/fleet_manage/backend/User/edituser', {
-        //     id: id
-        // }, {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Authorization': localStorage.getItem('token')
-        //     }
-        // }).then(function (response) {
-        //     let data = response.data;
-        //     setname(data.user.name)
-        //     setemail(data.user.email)
-        // })
+        navigate('/editpay/' + id);
+
     }
 
     return (
@@ -181,15 +152,15 @@ export default function Payment() {
                                                     </tr>
                                                     <tr>
                                                         <th>Transjection date</th>
-                                                        <td><input type='date' className='form-control' value="" onChange={(e) => seteDate(e.target.value)} value={email} /></td>
+                                                        <td><input type='date' className='form-control' onChange={(e) => seteDate(e.target.value)} value={email} /></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Amount</th>
-                                                        <td><input type='number' className='form-control' value="" onChange={(e) => setAmnt(e.target.value)} value={amnt} /></td>
+                                                        <td><input type='number' className='form-control' onChange={(e) => setAmnt(e.target.value)} value={amnt} /></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Remarks</th>
-                                                        <td><input type='text' className='form-control' value="" onChange={(e) => setRmrk(e.target.value)} value={rmRk} /></td>
+                                                        <td><input type='text' className='form-control' onChange={(e) => setRmrk(e.target.value)} value={rmRk} /></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Type</th>
@@ -268,3 +239,4 @@ export default function Payment() {
         </div>
     );
 }
+export default Payment;

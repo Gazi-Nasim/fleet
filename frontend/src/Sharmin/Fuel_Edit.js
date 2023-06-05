@@ -5,10 +5,10 @@ import Footer from "../Footer";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function Fuel_Edit() {
+const Fuel_Edit = () => {
   const navigate = useNavigate();
   const p = useParams();
-  const [vehicles, setvehicles] = useState([{ name :"", id: "" }]);
+  const [vehicles, setvehicles] = useState([{ name: "", id: "" }]);
   const [drivers, setdrivers] = useState([{ name: "", id: "" }]);
 
   const [vehicle, setvehicle] = useState("");
@@ -21,12 +21,12 @@ export default function Fuel_Edit() {
   const [msg, setmsg] = useState("");
 
 
-  
+
   useEffect(() => {
     ///--------vehicle-----
     axios({
       method: "get",
-      url: "http://localhost/fleet_manage/backend/Sharmin/getVehicle",
+      url: "http://localhost/fleet/backend/Sharmin/getVehicle",
       responseType: "json",
     }).then(function (response) {
       setvehicles(response.data.vehicle);
@@ -34,54 +34,44 @@ export default function Fuel_Edit() {
     //--------driver-(admin)--------
     axios({
       method: "get",
-      url: "http://localhost/fleet_manage/backend/Sharmin/getDriver",
+      url: "http://localhost/fleet/backend/Sharmin/getDriver",
       responseType: "json",
     }).then(function (response) {
       setdrivers(response.data.driver);
     });
     // --------edit start-----------
     axios
-        .post(
-          "http://localhost/fleet_manage/backend/Sharmin/editfuel",
-          {
-            id: p.id,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: localStorage.getItem("token"),
-            },
-          }
-        )
-       .then(function (response) {
-      let data = response.data;
-      console.log(data);
-      setvehicle(data.fuel.vehicle_id);
-      setdriver(data.fuel.driver_id);
-      setdate(data.fuel.fill_date);
-      setmeter(data.fuel.odometer);
-      setamount(data.fuel.amount);
-      setqty(data.fuel.qty);
-      setremarks(data.fuel.remarks);
-    });
-   
-    }, []);
-        //---------amount= Quantity (*) fixamount--------
-        // const to = () => {
-        //   if(qty==null){
-        //      setamount(0)
-        //   }else{
-        //   // setamount(parseInt(qty) - parseInt(meter));
-        //   setamount(parseInt(qty) * parseInt(110));
-        //   }
-      
-        // };
-      
-    //------------update start--------
-    const update = () => {
-      axios
       .post(
-        "http://localhost/fleet_manage/backend/Sharmin/updatefuel",
+        "http://localhost/fleet/backend/Sharmin/editfuel",
+        {
+          id: p.id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+      .then(function (response) {
+        let data = response.data;
+        console.log(data);
+        setvehicle(data.fuel.vehicle_id);
+        setdriver(data.fuel.driver_id);
+        setdate(data.fuel.fill_date);
+        setmeter(data.fuel.odometer);
+        setamount(data.fuel.amount);
+        setqty(data.fuel.qty);
+        setremarks(data.fuel.remarks);
+      });
+
+  }, []);
+
+  //------------update start--------
+  const update = () => {
+    axios
+      .post(
+        "http://localhost/fleet/backend/Sharmin/updatefuel",
         {
           vehicle_id: vehicle,
           driver_id: driver,
@@ -99,13 +89,13 @@ export default function Fuel_Edit() {
           },
         }
       )
-        .then(function (response) {
-          let data = response.data;
-          // console.log (data);
-          setmsg(data.msg);
-          setTimeout(() => navigate("/fuel_list"), 3000);
-        });
-    };
+      .then(function (response) {
+        let data = response.data;
+        // console.log (data);
+        setmsg(data.msg);
+        setTimeout(() => navigate("/fuel_list"), 3000);
+      });
+  };
 
   return (
     <div className="hold-transition sidebar-mini">
@@ -126,7 +116,7 @@ export default function Fuel_Edit() {
                     <li className="breadcrumb-item active">Update_Fuel</li>
                   </ol>
                 </div>
-                <h4 style={{color:'blue'}}>{msg}</h4>
+                <h4 style={{ color: 'blue' }}>{msg}</h4>
               </div>
             </div>
           </div>
@@ -135,7 +125,7 @@ export default function Fuel_Edit() {
             <div className="container-fluid">
               <div className="card" >
                 <div className="card-body">
-                
+
                   <div className="row">
                     <div className="col-sm-6 col-md-3">
                       <label className="form-label">
@@ -147,7 +137,7 @@ export default function Fuel_Edit() {
                           name="vehicle"
                           // required="true"
                           onChange={(e) => setvehicle(e.target.value)}
-                        value={vehicle}>
+                          value={vehicle}>
                           <option value="">Select Vehicle</option>
 
                           {vehicles.map((d, i) => {
@@ -260,36 +250,31 @@ export default function Fuel_Edit() {
                       </div>
                     </div>
                     <br />
-                    {/* <div className="col-sm-6 col-md-3">
-                    <div className="form-group">
-                     <label className="form-label">Need to add in expense?</label>
-                         <input className="form-control form-check-input" id="exp" name="exp" type="checkbox"/>
-                    </div>
-                  </div> */}
+
                   </div>
                 </div>
-                {/* <input type="hidden" id="v_created_date" name="v_created_date" value="2023-03-28 06:02:47"/>
-                 */}
+
                 <div className="modal-footer">
                   <button
                     type="submit"
-                   
+
                     onClick={update}
                     className="btn btn-primary"
                   >
-                   Update Fuel
+                    Update Fuel
                   </button>
                 </div>
               </div>
             </div>
           </section>
-          <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        
-         
-          
+          <br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
+
         </div>
         <Footer />
       </div>
     </div>
   );
 }
+export default Fuel_Edit;

@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Footer from '../Footer'
 import Menu from '../Menu'
 
-export default function Booking_add ()
-{
+const Booking_add = () => {
     const [customers, setcustomers] = useState([{ name: '', id: '' }]);
     const [customerid, setcustomerid] = useState('');
     const [vehicles, setvehicles] = useState([{ name: '', id: '' }]);
@@ -21,61 +20,49 @@ export default function Booking_add ()
     const [amount, setamount] = useState('');
     const [status, setstatus] = useState('');
     const navigate = useNavigate();
-    useEffect(() =>
-    {
+    useEffect(() => {
         let token = localStorage.getItem('token')
-        if (token == null)
-        {
+        if (token == null) {
             navigate("/");
         }
-        // axios({
-        //     method: 'get',
-        //     url: 'http://localhost/fleet_manage/backend/Tauhid/getCustomer',
-        //     responseType: 'json'
-        // }).then(function (response)
-        // {
-        //     setcustomers(response.data.customer)
-        // });
+
         getCustomer();
         getVehicle();
         getDriver();
     }, []);
-    const getCustomer = () =>
-    {
+
+    const getCustomer = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Tauhid/getCustomer',
+            url: 'http://localhost/fleet/backend/Tauhid/getCustomer',
             responseType: 'json'
-        }).then(function (response)
-        {
+        }).then(function (response) {
             setcustomers(response.data.customer)
         });
     }
-    const getVehicle = () =>
-    {
+
+    const getVehicle = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Tauhid/getVehicle',
+            url: 'http://localhost/fleet/backend/Tauhid/getVehicle',
             responseType: 'json'
-        }).then(function (response)
-        {
+        }).then(function (response) {
             setvehicles(response.data.vehicle)
         });
     }
-    const getDriver = () =>
-    {
+
+    const getDriver = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Tauhid/getDriver',
+            url: 'http://localhost/fleet/backend/Tauhid/getDriver',
             responseType: 'json'
-        }).then(function (response)
-        {
+        }).then(function (response) {
             setdrivers(response.data.driver)
         });
     }
-    const save = () =>
-    {
-        axios.post('http://localhost/fleet_manage/backend/Tauhid/addbooking', {
+
+    const save = () => {
+        axios.post('http://localhost/fleet/backend/Tauhid/addbooking', {
             customer_id: customerid,
             vehicle_id: vehicleid,
             driver_id: driverid,
@@ -92,8 +79,7 @@ export default function Booking_add ()
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')
             }
-        }).then(function (response)
-        {
+        }).then(function (response) {
             let data = response.data;
             setcustomerid('')
             setvehicleid('')
@@ -108,9 +94,8 @@ export default function Booking_add ()
             setstatus('')
         })
     }
-    // const chk = () => {
-    //     console.log(customers)
-    // }
+
+
     return (
         <>
             <div className="hold-transition sidebar-mini">
@@ -141,53 +126,50 @@ export default function Booking_add ()
                                             <div className="card-header">
                                                 <h3 className="card-title">Booking Form</h3>
                                             </div>
-                                            {/* <!-- /.card-header --> */ }
-                                            {/* <!-- form start --> */ }
+                                            {/* <!-- /.card-header --> */}
+                                            {/* <!-- form start --> */}
                                             <div className="card-body">
                                                 <div className='row'>
                                                     <div className='col-md-4'>
                                                         <div className="form-group">
                                                             <label>Customer</label>
-                                                            <select className='form-control' onChange={ (e) => setcustomerid(e.target.value) }>
+                                                            <select className='form-control' onChange={(e) => setcustomerid(e.target.value)}>
                                                                 <option value=''>Select Customer</option>
 
-                                                                { customers.map((d, i) =>
-                                                                {
+                                                                {customers.map((d, i) => {
                                                                     return (
-                                                                        <option value={ d.id } key={ i }>{ d.name }</option>
+                                                                        <option value={d.id} key={i}>{d.name}</option>
                                                                     )
-                                                                }) }
+                                                                })}
                                                             </select>
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Vehicle</label>
-                                                            <select className='form-control' onChange={ (e) => setvehicleid(e.target.value) }>
+                                                            <select className='form-control' onChange={(e) => setvehicleid(e.target.value)}>
                                                                 <option value=''>Select Vehicle</option>
 
-                                                                { vehicles.map((d, i) =>
-                                                                {
+                                                                {vehicles.map((d, i) => {
                                                                     return (
-                                                                        <option value={ d.id } key={ i }>{ d.name }</option>
+                                                                        <option value={d.id} key={i}>{d.name}</option>
                                                                     )
-                                                                }) }
+                                                                })}
                                                             </select>
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Driver</label>
-                                                            <select className='form-control' onChange={ (e) => setdriverid(e.target.value) }>
+                                                            <select className='form-control' onChange={(e) => setdriverid(e.target.value)}>
                                                                 <option value=''>Select Driver</option>
 
-                                                                { drivers.map((d, i) =>
-                                                                {
+                                                                {drivers.map((d, i) => {
                                                                     return (
-                                                                        <option value={ d.id } key={ i }>{ d.name }</option>
+                                                                        <option value={d.id} key={i}>{d.name}</option>
                                                                     )
-                                                                }) }
+                                                                })}
                                                             </select>
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Type</label><br />
-                                                            <div className="form-control" onChange={ (e) => settype(e.target.value) } value={type}>
+                                                            <div className="form-control" onChange={(e) => settype(e.target.value)} value={type}>
                                                                 <input type="radio" value="Single" name="type" /> Single
                                                                 <input type="radio" value="Round" name="type" /> Round
                                                             </div>
@@ -196,33 +178,33 @@ export default function Booking_add ()
                                                     <div className='col-md-4'>
                                                         <div className="form-group">
                                                             <label>Start Location</label>
-                                                            <input type="text" className="form-control" onChange={ (e) => setstartlocation(e.target.value) } value={ startlocation } />
+                                                            <input type="text" className="form-control" onChange={(e) => setstartlocation(e.target.value)} value={startlocation} />
                                                         </div>
                                                         <div className="form-group">
                                                             <label>End Location</label>
-                                                            <input type="text" className="form-control" onChange={ (e) => setendlocation(e.target.value) } value={ endlocation } />
+                                                            <input type="text" className="form-control" onChange={(e) => setendlocation(e.target.value)} value={endlocation} />
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Start Date</label>
-                                                            <input type="datetime-local" className="form-control" onChange={ (e) => setstartdate(e.target.value) } value={ startdate } />
+                                                            <input type="datetime-local" className="form-control" onChange={(e) => setstartdate(e.target.value)} value={startdate} />
                                                         </div>
                                                         <div className="form-group">
                                                             <label>End Date</label>
-                                                            <input type="datetime-local" className="form-control" onChange={ (e) => setenddate(e.target.value) } value={ enddate } />
+                                                            <input type="datetime-local" className="form-control" onChange={(e) => setenddate(e.target.value)} value={enddate} />
                                                         </div>
                                                     </div>
                                                     <div className='col-md-4'>
                                                         <div className="form-group">
                                                             <label>Approx. Km</label>
-                                                            <input type="text" className="form-control" onChange={ (e) => setaproxkm(e.target.value) } value={ aproxkm } />
+                                                            <input type="text" className="form-control" onChange={(e) => setaproxkm(e.target.value)} value={aproxkm} />
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Amount</label>
-                                                            <input type="text" className="form-control" onChange={ (e) => setamount(e.target.value) } value={ amount } />
+                                                            <input type="text" className="form-control" onChange={(e) => setamount(e.target.value)} value={amount} />
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Status</label>
-                                                            <div className="" onChange={ (e) => setstatus(e.target.value) } value={ status }>
+                                                            <div className="" onChange={(e) => setstatus(e.target.value)} value={status}>
                                                                 <input type="radio" value="Yet to Start" name="status" /> Yet to Start
                                                                 <input type="radio" value="Completed" name="status" /> Completed
                                                                 <input type="radio" value="On Going" name="status" /> On Going
@@ -230,10 +212,10 @@ export default function Booking_add ()
                                                             </div>
                                                         </div>
 
-                                                        {/* <!-- /.card-body --> */ }
+                                                        {/* <!-- /.card-body --> */}
 
                                                         <div className="card-footer">
-                                                            <button type="submit" className="btn btn-primary" onClick={ save }>Submit</button>
+                                                            <button type="submit" className="btn btn-primary" onClick={save}>Submit</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -255,3 +237,4 @@ export default function Booking_add ()
         </>
     )
 }
+export default Booking_add;

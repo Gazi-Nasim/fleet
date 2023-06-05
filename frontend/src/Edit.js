@@ -13,7 +13,7 @@ const Edit = () => {
     const [msg, setmsg] = useState('');
     const [userRole, setRole] = useState('');
     useEffect(() => {
-        axios.post('http://localhost/fleet_manage/backend/User/edituser', {
+        axios.post('http://localhost/fleet/backend/User/edituser', {
             id: p.id
         }, {
             headers: {
@@ -28,7 +28,7 @@ const Edit = () => {
         })
     }, []);
     const save = () => {
-        axios.post('http://localhost/fleet_manage/backend/User/updateuser', {
+        axios.post('http://localhost/fleet/backend/User/updateuser', {
             email: email,
             password: pass,
             name: name,

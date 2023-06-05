@@ -8,7 +8,7 @@ const Login = () => {
      const [error, seterror] = useState('Sign in to start your session');
      const navigate=useNavigate();
      const login=()=>{
-        axios.post('http://localhost/fleet_manage/backend/Login', {
+        axios.post('http://localhost/fleet/backend/Login', {
         email: mail,
         password: pass
       },{

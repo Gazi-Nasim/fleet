@@ -4,8 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Footer from '../Footer'
 import Menu from '../Menu'
 
-export default function Booking_view ()
-{
+const Booking_view = () => {
+
     const navigate = useNavigate();
     const p = useParams();
     const [customers, setcustomers] = useState([{ name: '', id: '' }]);
@@ -22,17 +22,15 @@ export default function Booking_view ()
     const [aproxkm, setaproxkm] = useState('');
     const [amount, setamount] = useState('');
     const [status, setstatus] = useState('');
-    useEffect(() =>
-    {
-        axios.post('http://localhost/fleet_manage/backend/Tauhid/editbooking', {
+    useEffect(() => {
+        axios.post('http://localhost/fleet/backend/Tauhid/editbooking', {
             id: p.id
         }, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')
             }
-        }).then(function (response)
-        {
+        }).then(function (response) {
             let data = response.data;
             setcustomerid(data.booking.customer_id)
             setvehicleid(data.booking.vehicle_id)
@@ -51,41 +49,34 @@ export default function Booking_view ()
         getVehicle();
         getDriver();
     }, []);
-    const getCustomer = () =>
-    {
+    const getCustomer = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Tauhid/getCustomer',
+            url: 'http://localhost/fleet/backend/Tauhid/getCustomer',
             responseType: 'json'
-        }).then(function (response)
-        {
+        }).then(function (response) {
             setcustomers(response.data.customer)
         });
     }
-    const getVehicle = () =>
-    {
+    const getVehicle = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Tauhid/getVehicle',
+            url: 'http://localhost/fleet/backend/Tauhid/getVehicle',
             responseType: 'json'
-        }).then(function (response)
-        {
+        }).then(function (response) {
             setvehicles(response.data.vehicle)
         });
     }
-    const getDriver = () =>
-    {
+    const getDriver = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Tauhid/getDriver',
+            url: 'http://localhost/fleet/backend/Tauhid/getDriver',
             responseType: 'json'
-        }).then(function (response)
-        {
+        }).then(function (response) {
             setdrivers(response.data.driver)
         });
     }
-    const back = () =>
-    {
+    const back = () => {
         navigate('/bookinglist')
     }
     return (
@@ -118,102 +109,99 @@ export default function Booking_view ()
                                             <div className="card-header">
                                                 <h3 className="card-title">Booking Form</h3>
                                             </div>
-                                            {/* <!-- /.card-header --> */ }
-                                            {/* <!-- form start --> */ }
+                                            {/* <!-- /.card-header --> */}
+                                            {/* <!-- form start --> */}
                                             <div className="card-body">
                                                 <div className='row'>
                                                     <div className='col-md-4'>
                                                         <div className="form-group">
                                                             <label>Customer</label>
-                                                            <select className='form-control' onChange={ (e) => setcustomerid(e.target.value) } value={ customerid } disabled>
+                                                            <select className='form-control' onChange={(e) => setcustomerid(e.target.value)} value={customerid} disabled>
                                                                 <option value=''>Select Customer</option>
 
-                                                                { customers.map((d, i) =>
-                                                                {
+                                                                {customers.map((d, i) => {
                                                                     return (
-                                                                        <option value={ d.id } key={ i }>{ d.name }</option>
+                                                                        <option value={d.id} key={i}>{d.name}</option>
                                                                     )
-                                                                }) }
+                                                                })}
                                                             </select>
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Vehicle</label>
-                                                            <select className='form-control' onChange={ (e) => setvehicleid(e.target.value) } value={ vehicleid } disabled>
+                                                            <select className='form-control' onChange={(e) => setvehicleid(e.target.value)} value={vehicleid} disabled>
                                                                 <option value=''>Select Vehicle</option>
 
-                                                                { vehicles.map((d, i) =>
-                                                                {
+                                                                {vehicles.map((d, i) => {
                                                                     return (
-                                                                        <option value={ d.id } key={ i }>{ d.name }</option>
+                                                                        <option value={d.id} key={i}>{d.name}</option>
                                                                     )
-                                                                }) }
+                                                                })}
                                                             </select>
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Driver</label>
-                                                            <select className='form-control' onChange={ (e) => setdriverid(e.target.value) } value={ driverid } disabled>
+                                                            <select className='form-control' onChange={(e) => setdriverid(e.target.value)} value={driverid} disabled>
                                                                 <option value=''>Select Driver</option>
 
-                                                                { drivers.map((d, i) =>
-                                                                {
+                                                                {drivers.map((d, i) => {
                                                                     return (
-                                                                        <option value={ d.id } key={ i }>{ d.name }</option>
+                                                                        <option value={d.id} key={i}>{d.name}</option>
                                                                     )
-                                                                }) }
+                                                                })}
                                                             </select>
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Type</label><br />
-                                                            <div className="form-control" onChange={ (e) => settype(e.target.value) } value={ type } >
-                                                                { (type == 'single') ? <input type="radio" value="Single" checked /> : <input type="radio" value="Single" /> }Single
+                                                            <div className="form-control" onChange={(e) => settype(e.target.value)} value={type} >
+                                                                {(type == 'single') ? <input type="radio" value="Single" checked /> : <input type="radio" value="Single" />}Single
 
-                                                                { (type == 'round') ? <input type="radio" value="Round" checked /> : <input type="radio" value="Round" /> }Round
+                                                                {(type == 'round') ? <input type="radio" value="Round" checked /> : <input type="radio" value="Round" />}Round
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className='col-md-4'>
                                                         <div className="form-group">
                                                             <label>Start Location</label>
-                                                            <input type="text" className="form-control" onChange={ (e) => setstartlocation(e.target.value) } value={ startlocation } disabled/>
+                                                            <input type="text" className="form-control" onChange={(e) => setstartlocation(e.target.value)} value={startlocation} disabled />
                                                         </div>
                                                         <div className="form-group">
                                                             <label>End Location</label>
-                                                            <input type="text" className="form-control" onChange={ (e) => setendlocation(e.target.value) } value={ endlocation } disabled/>
+                                                            <input type="text" className="form-control" onChange={(e) => setendlocation(e.target.value)} value={endlocation} disabled />
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Start Date</label>
-                                                            <input type="datetime-local" className="form-control" onChange={ (e) => setstartdate(e.target.value) } value={ startdate } disabled/>
+                                                            <input type="datetime-local" className="form-control" onChange={(e) => setstartdate(e.target.value)} value={startdate} disabled />
                                                         </div>
                                                         <div className="form-group">
                                                             <label>End Date</label>
-                                                            <input type="datetime-local" className="form-control" onChange={ (e) => setenddate(e.target.value) } value={ enddate } disabled/>
+                                                            <input type="datetime-local" className="form-control" onChange={(e) => setenddate(e.target.value)} value={enddate} disabled />
                                                         </div>
                                                     </div>
                                                     <div className='col-md-4'>
                                                         <div className="form-group">
                                                             <label>Approx. Km</label>
-                                                            <input type="text" className="form-control" onChange={ (e) => setaproxkm(e.target.value) } value={ aproxkm } disabled/>
+                                                            <input type="text" className="form-control" onChange={(e) => setaproxkm(e.target.value)} value={aproxkm} disabled />
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Amount</label>
-                                                            <input type="text" className="form-control" onChange={ (e) => setamount(e.target.value) } value={ amount } disabled/>
+                                                            <input type="text" className="form-control" onChange={(e) => setamount(e.target.value)} value={amount} disabled />
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Status</label>
-                                                            <div className="" onChange={ (e) => setstatus(e.target.value) } value={ status }>
-                                                                { (status == 'yet to start') ? <input type="radio" value="yet to start" checked /> : <input type="radio" value="yet to start" /> }Yet to Start
-                                                                { (status == 'completed') ? <input type="radio" value="completed" checked /> : <input type="radio" value="completed" /> }Completed
-                                                                { (status == 'on going') ? <input type="radio" value="on going" checked /> : <input type="radio" value="on going" /> }On Going
-                                                                { (status == 'cancelled') ? <input type="radio" value="cancelled" checked /> : <input type="radio" value="cancelled" /> }Cancelled
+                                                            <div className="" onChange={(e) => setstatus(e.target.value)} value={status}>
+                                                                {(status == 'yet to start') ? <input type="radio" value="yet to start" checked /> : <input type="radio" value="yet to start" />}Yet to Start
+                                                                {(status == 'completed') ? <input type="radio" value="completed" checked /> : <input type="radio" value="completed" />}Completed
+                                                                {(status == 'on going') ? <input type="radio" value="on going" checked /> : <input type="radio" value="on going" />}On Going
+                                                                {(status == 'cancelled') ? <input type="radio" value="cancelled" checked /> : <input type="radio" value="cancelled" />}Cancelled
                                                             </div>
                                                         </div>
                                                         <div className="card-footer">
-                                                            <button type="submit" className="btn btn-primary" onClick={ back }>Go Back</button>
+                                                            <button type="submit" className="btn btn-primary" onClick={back}>Go Back</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            {/* <!-- /.card-body --> */ }
+                                            {/* <!-- /.card-body --> */}
 
 
 
@@ -233,3 +221,4 @@ export default function Booking_view ()
         </>
     )
 }
+export default Booking_view;

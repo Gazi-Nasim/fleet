@@ -3,33 +3,36 @@ import { useNavigate } from 'react-router-dom';
 import Menu from '../Menu'
 import Footer from '../Footer'
 import axios from 'axios';
-export default function Vendorlist() {
+
+const Vendorlist = () => {
     const navigate = useNavigate();
     const [data, setList] = useState([]);
     const [name, setname] = useState('');
     const [address, setaddress] = useState('');
     const [phone, setphone] = useState('');
     const [email, setemail] = useState('');
+
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Vendors',
+            url: 'http://localhost/fleet/backend/Vendors',
             responseType: 'json'
         }).then(function (response) {
             setList(response.data.list)
         });
     }
+
     useEffect(() => {
         getdata()
     }, []);
 
     const save = () => {
-        axios.post('http://localhost/fleet_manage/backend/Vendors/addvendors', {
-            name:name,
-            address:address,
-            phone:phone,
+        axios.post('http://localhost/fleet/backend/Vendors/addvendors', {
+            name: name,
+            address: address,
+            phone: phone,
             email: email,
-            
+
         }, {
             headers: {
                 'Content-Type': 'application/json',
@@ -37,7 +40,7 @@ export default function Vendorlist() {
             }
         }).then(function (response) {
             let data = response.data;
-           
+
             setname('')
             setaddress('')
             setphone('')
@@ -45,8 +48,9 @@ export default function Vendorlist() {
             getdata()
         })
     }
+
     const deleteuser = (id) => {
-        axios.post('http://localhost/fleet_manage/backend/Vendors/deletevendors', {
+        axios.post('http://localhost/fleet/backend/Vendors/deletevendors', {
             id: id
         }, {
             headers: {
@@ -55,15 +59,15 @@ export default function Vendorlist() {
             }
         }).then(function (response) {
             let data = response.data;
-           
+
             getdata()
         })
     }
 
-    const editvendors=(id)=>{
-    
-        navigate('/editvendors/'+id)
-      }
+    const editvendors = (id) => {
+
+        navigate('/editvendors/' + id)
+    }
 
 
     return (
@@ -103,24 +107,24 @@ export default function Vendorlist() {
                                                     <tbody>
                                                         <tr>
                                                             <th>Name</th>
-                                                            <td><input type='text' className='form-control'  onChange={(e) => setname(e.target.value)} value={name}/>
+                                                            <td><input type='text' className='form-control' onChange={(e) => setname(e.target.value)} value={name} />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <th>Address</th>
-                                                            <td><input type='text' className='form-control' onChange={(e) => setaddress(e.target.value)} value={address}/></td>
+                                                            <td><input type='text' className='form-control' onChange={(e) => setaddress(e.target.value)} value={address} /></td>
                                                         </tr>
                                                         <tr>
                                                             <th>Phone Number</th>
-                                                            <td><input type='text' className='form-control' onChange={(e) => setphone(e.target.value)} value={phone}/></td>
+                                                            <td><input type='text' className='form-control' onChange={(e) => setphone(e.target.value)} value={phone} /></td>
 
-                                                            
+
                                                         </tr>
 
                                                         <tr>
                                                             <th>Email</th>
-                                                            <td><input type='text' className='form-control' onChange={(e) => setemail(e.target.value)} value={email}/> </td>
-                                                          
+                                                            <td><input type='text' className='form-control' onChange={(e) => setemail(e.target.value)} value={email} /> </td>
+
                                                         </tr>
 
 
@@ -168,10 +172,10 @@ export default function Vendorlist() {
                                                                 <td>{d.phone}</td>
                                                                 <td>{d.email}</td>
 
-                                                               <td><button class="btn btn-danger" onClick={ () => deleteuser(d.id) }>Delete</button></td> 
+                                                                <td><button class="btn btn-danger" onClick={() => deleteuser(d.id)}>Delete</button></td>
 
-                                                                <td><button 
-                                                                onClick={()=>editvendors(d.id)} class="btn btn-success">Edit</button></td>
+                                                                <td><button
+                                                                    onClick={() => editvendors(d.id)} class="btn btn-success">Edit</button></td>
 
 
 
@@ -201,3 +205,4 @@ export default function Vendorlist() {
         </div>
     )
 }
+export default Vendorlist;

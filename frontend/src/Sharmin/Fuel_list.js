@@ -6,7 +6,7 @@ import Menu from "../Menu";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 export default function Fuel_list() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [vehicles, setvehicles] = useState([{ name: "", id: "" }]);
   const [drivers, setdrivers] = useState([{ name: "", id: "" }]);
@@ -19,13 +19,11 @@ export default function Fuel_list() {
   const [amount, setamount] = useState("");
   const [remarks, setremarks] = useState("");
   const [msg, setmsg] = useState("");
-  // const [type, settype] = useState("insert");
-  // const [fuelID, setid] = useState("");
 
   const getFuel = () => {
     axios({
       method: "get",
-      url: "http://localhost/fleet_manage/backend/Sharmin",
+      url: "http://localhost/fleet/backend/Sharmin",
       responseType: "json",
     }).then(function (response) {
       setList(response.data.fuels);
@@ -38,7 +36,7 @@ export default function Fuel_list() {
     }
     axios({
       method: "get",
-      url: "http://localhost/fleet_manage/backend/Sharmin/getVehicle",
+      url: "http://localhost/fleet/backend/Sharmin/getVehicle",
       responseType: "json",
     }).then(function (response) {
       setvehicles(response.data.vehicle);
@@ -46,7 +44,7 @@ export default function Fuel_list() {
     //--------driver-(admin)--------
     axios({
       method: "get",
-      url: "http://localhost/fleet_manage/backend/Sharmin/getDriver",
+      url: "http://localhost/fleet/backend/Sharmin/getDriver",
       responseType: "json",
     }).then(function (response) {
       setdrivers(response.data.driver);
@@ -55,39 +53,39 @@ export default function Fuel_list() {
     getFuel();
   }, []);
 
-    //-----delete-------start
-    const deletefuel = (id) => {
-        axios
-          .post(
-            "http://localhost/fleet_manage/backend/Sharmin/deletefuel",
-            {
-              id: id,
-            },
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: localStorage.getItem("token"),
-              },
-            }
-          )
-          .then(function (response) {
-            let data = response.data;
-            setmsg(data.msg);
-            getFuel();
-          });
-      };
-      //-----delete-------end
-    
-      //--------edit start------
-       const editfuel = (id) => {
-       navigate("/Fuel_Edit/" + id);
-        };
-      //--------edit end-----
+  //-----delete-------start
+  const deletefuel = (id) => {
+    axios
+      .post(
+        "http://localhost/fleet/backend/Sharmin/deletefuel",
+        {
+          id: id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+      .then(function (response) {
+        let data = response.data;
+        setmsg(data.msg);
+        getFuel();
+      });
+  };
+  //-----delete-------end
+
+  //--------edit start------
+  const editfuel = (id) => {
+    navigate("/Fuel_Edit/" + id);
+  };
+  //--------edit end-----
   return (
 
-       <div className="hold-transition sidebar-mini">
+    <div className="hold-transition sidebar-mini">
       <div className="wrapper">
- <Menu/>
+        <Menu />
         <div className="content-wrapper pb-2 mb-0 ">
           <div className="content-header ">
             <div className="container-fluid ">
@@ -109,76 +107,76 @@ export default function Fuel_list() {
           </div>
 
 
-  <div className="content">
+          <div className="content">
             <div className="container-fluid">
               <section className="card">
                 <div className="card-body">
-          <div className="card card-primary card-outline">
-                <div className="card-header bg-primary">
-                  <h3 className="m-0">Fuel Info</h3>
-                </div>
-                {/* <div className="card-body"> */}
-                <table className="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>SL</th>
-                      <th>Fill_Date</th>
-                      <th>DriverName</th>
-                      <th>VehicleName</th>
-                      <th>Quantity</th>
-                      <th>Odometer</th>
-                      <th>Amount</th>
-                      <th>Remarks</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.map((d, i) => (
-                      <tr key={i}>
-                        <td>{i + 1}</td>
-                        <td>{d.fill_date}</td>
-                        <td>{d.drivername}</td>
-                        <td>{d.vehiclename}</td>
-                        <td>{d.qty}</td>
-                        <td>{d.odometer}</td>
-                        <td>{d.amount}</td>
-                        <td>{d.remarks}</td>
+                  <div className="card card-primary card-outline">
+                    <div className="card-header bg-primary">
+                      <h3 className="m-0">Fuel Info</h3>
+                    </div>
+                    {/* <div className="card-body"> */}
+                    <table className="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>SL</th>
+                          <th>Fill_Date</th>
+                          <th>DriverName</th>
+                          <th>VehicleName</th>
+                          <th>Quantity</th>
+                          <th>Odometer</th>
+                          <th>Amount</th>
+                          <th>Remarks</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {data.map((d, i) => (
+                          <tr key={i}>
+                            <td>{i + 1}</td>
+                            <td>{d.fill_date}</td>
+                            <td>{d.drivername}</td>
+                            <td>{d.vehiclename}</td>
+                            <td>{d.qty}</td>
+                            <td>{d.odometer}</td>
+                            <td>{d.amount}</td>
+                            <td>{d.remarks}</td>
 
-                        <td>
-                          <button
-                            className="btn btn-success"
-                            onClick={() => editfuel(d.id)}  >
-                            <i class="fa fa-edit"></i>
-                          </button>
-                          &nbsp;&nbsp;
-                          <button
-                            className="btn btn-danger"
-                            onClick={() => deletefuel(d.id)}
-                          >
-                            <i class="fa fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                {/* </div> */}
-              </div>
+                            <td>
+                              <button
+                                className="btn btn-success"
+                                onClick={() => editfuel(d.id)}  >
+                                <i class="fa fa-edit"></i>
+                              </button>
+                              &nbsp;&nbsp;
+                              <button
+                                className="btn btn-danger"
+                                onClick={() => deletefuel(d.id)}
+                              >
+                                <i class="fa fa-trash"></i>
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    {/* </div> */}
+                  </div>
+                </div>
+              </section>
+
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
             </div>
-          </section>
-         
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+          </div>
         </div>
+        <Footer />
       </div>
     </div>
-    <Footer />
-    </div>
-    </div>
-   
- 
+
+
   )
 }

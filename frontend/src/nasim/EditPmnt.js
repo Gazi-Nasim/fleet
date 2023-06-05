@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 
 
-export default function EditPmnt() {
+const EditPmnt = () => {
 
     const [Vnm, setVehi] = useState([]);
     const [carID, setcarID] = useState('');
@@ -18,11 +18,10 @@ export default function EditPmnt() {
     const [typ_e, setType] = useState('');
     const [msg, setmsg] = useState('');
     const q = useParams();
-    // console.log(q);
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.post('http://localhost/fleet_manage/backend/Payment_c/getPerId', {
+        axios.post('http://localhost/fleet/backend/Payment_c/getPerId', {
             id: q.id
         }, {
             headers: {
@@ -48,7 +47,7 @@ export default function EditPmnt() {
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Payment_c/VehicleName',
+            url: 'http://localhost/fleet/backend/Payment_c/VehicleName',
             responseType: 'json'
         }).then(function (response) {
             let VnmN = response.data.vehicl;
@@ -64,8 +63,8 @@ export default function EditPmnt() {
     // -------- /Part for Name
 
     const update = () => {
-        axios.post('http://localhost/fleet_manage/backend/Payment_c/saveUpdate', {
-            id:inExid,
+        axios.post('http://localhost/fleet/backend/Payment_c/saveUpdate', {
+            id: inExid,
             vehicle_id: carID,
             trans_date: Vdate,
             amount: amnt,
@@ -81,9 +80,6 @@ export default function EditPmnt() {
             setmsg(data.msg);
             setVehiNM(data.msg);
             // seteDate('');
-            // setRmrk('');
-            // setAmnt('');
-            // setType('');
             navigate("/payment");
         })
     }
@@ -194,3 +190,4 @@ export default function EditPmnt() {
     );
 
 }
+export default EditPmnt;

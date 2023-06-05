@@ -44,11 +44,9 @@ import Driver from './mahmud/Driver';
 import Driveredit from './mahmud/Driveredit';
 import Driverlist from './mahmud/Driverlist';
 
-
 import Customers from './customers/Customers';
 import Customersedit from './customers/Customersedit';
 import Customer_list from './customers/Customer_list';
-
 
 import Driver_payment_add from './Opu/Driver_payment_add';
 import Driver_payment_list from './Opu/Driver_payment_list';

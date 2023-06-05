@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 import Menu from '../Menu';
 
-export default function Booking_list() {
+const Booking_list = () => {
     const [booking, setbooking] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
@@ -14,17 +14,19 @@ export default function Booking_list() {
         }
         getBooking();
     }, []);
+
     const getBooking = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Tauhid/getBooking',
+            url: 'http://localhost/fleet/backend/Tauhid/getBooking',
             responseType: 'json'
         }).then(function (response) {
             setbooking(response.data.booking)
         });
     }
+
     const deletebooking = (id) => {
-        axios.post('http://localhost/fleet_manage/backend/Tauhid/deletebooking', {
+        axios.post('http://localhost/fleet/backend/Tauhid/deletebooking', {
             id: id
         }, {
             headers: {
@@ -37,22 +39,14 @@ export default function Booking_list() {
         })
     }
     const editbooking = (id) => {
-        navigate('/bookingedit/'+id)
-        // axios.post('http://localhost/fleet_manage/backend/Tauhid/editbooking', {
-        //     id: id
-        // }, {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Authorization': localStorage.getItem('token')
-        //     }
-        // }).then(function (response) {
-        //     let data = response.data;
-        //     console.log(data)
-        // })
+        navigate('/bookingedit/' + id)
+
     }
+
     const viewbooking = (id) => {
-        navigate('/bookingview/'+id)
+        navigate('/bookingview/' + id)
     }
+
     return (
         <>
             <div className="hold-transition sidebar-mini">
@@ -84,15 +78,6 @@ export default function Booking_list() {
                                                 <h3 className="card-title">Booking Data List</h3>
 
                                                 <div className="card-tools">
-                                                    {/* <div className="input-group input-group-sm" style={{width: 150}}>
-                                                        <input type="text" name="table_search" className="form-control float-right" placeholder="Search"/>
-
-                                                            <div className="input-group-append">
-                                                                <button type="submit" className="btn btn-default">
-                                                                    <i className="fas fa-search"></i>
-                                                                </button>
-                                                            </div>
-                                                    </div> */}
                                                 </div>
                                             </div>
                                             {/* <!-- /.card-header --> */}
@@ -143,3 +128,4 @@ export default function Booking_list() {
         </>
     )
 }
+export default Booking_list;

@@ -11,7 +11,7 @@ export default function Maintenancelist() {
       const getMaintenance = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Maintenance/getMaintenance',
+            url: 'http://localhost/fleet/backend/Maintenance/getMaintenance',
             responseType: 'json'
         }).then(function (response) {
             setList(response.data.maintenance);
@@ -28,7 +28,7 @@ export default function Maintenancelist() {
         }
         //------delete---------
         const deletemaintenance = (id) => {
-            axios.post('http://localhost/fleet_manage/backend/Maintenance/deletemaintenance', {
+            axios.post('http://localhost/fleet/backend/Maintenance/deletemaintenance', {
                 id: id
             },
                 {

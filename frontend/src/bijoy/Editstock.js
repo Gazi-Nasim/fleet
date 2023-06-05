@@ -18,7 +18,7 @@ const Editstock = () => {
     const [msg, setmsg] = useState('');
 
     useEffect(() => {
-        axios.post('http://localhost/fleet_manage/backend/Parts/editparts', {
+        axios.post('http://localhost/fleet/backend/Parts/editparts', {
             id: p.id
         }, {
             headers: {
@@ -40,7 +40,7 @@ const Editstock = () => {
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Parts/get_parts',
+            url: 'http://localhost/fleet/backend/Parts/get_parts',
             responseType: 'json'
         }).then(function (response) {
             setparts(response.data.list)
@@ -52,7 +52,7 @@ const Editstock = () => {
     }, []);
 
     const update = () => {
-        axios.post('http://localhost/fleet_manage/backend/Parts/updatestockout', {
+        axios.post('http://localhost/fleet/backend/Parts/updatestockout', {
             id: p.id,
             parts_id: partsID,
             qty: qty,

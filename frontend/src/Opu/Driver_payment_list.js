@@ -1,61 +1,50 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 import Menu from '../Menu';
 import axios from 'axios';
 
-// export default function Driver_payment_list() {
-    
-    export default function Payment_list() {
-        const [payment, setpayment] = useState([]);
-        const navigate = useNavigate();
-        useEffect(() => {
-            let token = localStorage.getItem('token')
-            if (token == null) {
-                navigate("/");
-            }
-            getPayment();
-            console.log(payment);
-        }, []);
 
-        const getPayment = () => {
-            axios({
-                method:'get',
-                url: 'http://localhost/fleet_manage/backend/Opu/getPayment',
-                responseType:'json'
-            }).then(function (response) {
-                setpayment(response.data.payment)
-                console.log(response.data.payment);
-            });
+
+const Driver_payment_list = () => {
+    const [payment, setpayment] = useState([]);
+    const navigate = useNavigate();
+    useEffect(() => {
+        let token = localStorage.getItem('token')
+        if (token == null) {
+            navigate("/");
         }
-        const deletepayment = (id) => {
-            axios.post('http://localhost/fleet_manage/backend/Opu/deletepayment', {
-                id: id
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem('token')
-                }
-            }).then(function (response) {
-                let data = response.data;
-                getPayment();
-            })
-        }
-        const editpayment= (id) => {
-            navigate('/paymentedit/'+id)
-            // axios.post('http://localhost/fleet_manage/backend/Tauhid/editbooking', {
-            //     id: id
-            // }, {
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization': localStorage.getItem('token')
-            //     }
-            // }).then(function (response) {
-            //     let data = response.data;
-            //     console.log(data)
-            // })
-        }
+        getPayment();
+        console.log(payment);
+    }, []);
+
+    const getPayment = () => {
+        axios({
+            method: 'get',
+            url: 'http://localhost/fleet/backend/Opu/getPayment',
+            responseType: 'json'
+        }).then(function (response) {
+            setpayment(response.data.payment)
+            console.log(response.data.payment);
+        });
+    }
+    const deletepayment = (id) => {
+        axios.post('http://localhost/fleet/backend/Opu/deletepayment', {
+            id: id
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        }).then(function (response) {
+            let data = response.data;
+            getPayment();
+        })
+    }
+    const editpayment = (id) => {
+        navigate('/paymentedit/' + id)
+
+    }
 
     return (
         <>
@@ -88,15 +77,7 @@ import axios from 'axios';
                                                 <h3 className="card-title">Payment List</h3>
 
                                                 <div className="card-tools">
-                                                    {/* <div className="input-group input-group-sm" style={{width: 150}}>
-                                                        <input type="text" name="table_search" className="form-control float-right" placeholder="Search"/>
 
-                                                            <div className="input-group-append">
-                                                                <button type="submit" className="btn btn-default">
-                                                                    <i className="fas fa-search"></i>
-                                                                </button>
-                                                            </div>
-                                                    </div> */}
                                                 </div>
                                             </div>
                                             {/* <!-- /.card-header --> */}
@@ -121,11 +102,11 @@ import axios from 'axios';
                                                                 <td>{f.amount}</td>
                                                                 <td>{f.remarks}</td>
                                                                 <td>
-                                                                <button onClick={() => editpayment(f.id)} className="btn btn-xs btn-primary">Edit</button>
-                                                                <button onClick={() => deletepayment(f.id)} className="btn btn-xs btn-danger">Delete</button>
+                                                                    <button onClick={() => editpayment(f.id)} className="btn btn-xs btn-primary">Edit</button>
+                                                                    <button onClick={() => deletepayment(f.id)} className="btn btn-xs btn-danger">Delete</button>
                                                                 </td>
                                                             </tr>
-                                                        )} 
+                                                        )}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -146,3 +127,4 @@ import axios from 'axios';
         </>
     )
 }
+export default Driver_payment_list;

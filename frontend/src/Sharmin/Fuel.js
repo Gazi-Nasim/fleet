@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import Footer from "../Footer";
 import Menu from "../Menu";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Footer";
-// import Menu from "../menu/Menu";
 
 export default function Fuel() {
   const navigate = useNavigate();
@@ -20,12 +18,10 @@ export default function Fuel() {
   const [amount, setamount] = useState("");
   const [remarks, setremarks] = useState("");
   const [msg, setmsg] = useState("");
-  // const [type, settype] = useState("insert");
-  // const [fuelID, setid] = useState("");
   const getFuel = () => {
     axios({
       method: "get",
-      url: "http://localhost/fleet_manage/backend/Sharmin",
+      url: "http://localhost/fleet/backend/Sharmin",
       responseType: "json",
     }).then(function (response) {
       setList(response.data.fuels);
@@ -38,39 +34,29 @@ export default function Fuel() {
     }
     axios({
       method: "get",
-      url: "http://localhost/fleet_manage/backend/Sharmin/getVehicle",
+      url: "http://localhost/fleet/backend/Sharmin/getVehicle",
       responseType: "json",
     }).then(function (response) {
       setvehicles(response.data.vehicle);
     });
     //--------driver-(admin)--------
+
     axios({
       method: "get",
-      url: "http://localhost/fleet_manage/backend/Sharmin/getDriver",
+      url: "http://localhost/fleet/backend/Sharmin/getDriver",
       responseType: "json",
     }).then(function (response) {
       setdrivers(response.data.driver);
     });
-    // getdata();
     getFuel();
   }, []);
-  //---------amount= Quantity (*) fixamount--------
-  // const to = () => {
-  //   if (qty == null) {
-  //     setamount(0)
-  //   } else {
-  //     // setamount(parseInt(qty) - parseInt(meter));
-  //     setamount(parseInt(qty) * parseInt(110));
-  //   }
-
-  // };
 
   //-------------Insert------------------
 
   const save = () => {
     axios
       .post(
-        "http://localhost/fleet_manage/backend/Sharmin/addfuel",
+        "http://localhost/fleet/backend/Sharmin/addfuel",
         {
           vehicle_id: vehicle,
           driver_id: driver,
@@ -105,7 +91,7 @@ export default function Fuel() {
   const deletefuel = (id) => {
     axios
       .post(
-        "http://localhost/fleet_manage/backend/Sharmin/deletefuel",
+        "http://localhost/fleet/backend/Sharmin/deletefuel",
         {
           id: id,
         },
@@ -284,16 +270,8 @@ export default function Fuel() {
                       </div>
                     </div>
                     <br />
-                    {/* <div className="col-sm-6 col-md-3">
-                      <div className="form-group">
-                       <label className="form-label">Need to add in expense?</label>
-                           <input className="form-control form-check-input" id="exp" name="exp" type="checkbox"/>
-                      </div>
-                    </div> */}
                   </div>
                 </div>
-                {/* <input type="hidden" id="v_created_date" name="v_created_date" value="2023-03-28 06:02:47"/>
-                 */}
                 <div className="modal-footer">
                   <button
                     type="submit"
@@ -306,16 +284,13 @@ export default function Fuel() {
               </div>
               <br />
               <br />
-              
+
             </div>
 
           </section>
 
           <br /><br /><br /><br /><br /><br /><br /><br /><br />
 
-
-
-          
         </div>
         <Footer />
       </div>

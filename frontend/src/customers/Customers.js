@@ -17,13 +17,14 @@ const Customers = () => {
     const [address, setaddress] = useState('');
     const [status, setstatus] = useState('');
     const [msg, setmsg] = useState('');
+
     const [type, settype] = useState('insert');
     const [userID, setid] = useState('');
 
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Customers',
+            url: 'http://localhost/fleet/backend/Customers',
             responseType: 'json'
         }).then(function (response) {
             setList(response.data.list)
@@ -37,7 +38,7 @@ const Customers = () => {
     const getCustomer = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Customers/getCustomer',
+            url: 'http://localhost/fleet/backend/Customers/getCustomer',
             responseType: 'json'
         }).then(function (response) {
             setadmin(response.data.admin)
@@ -49,8 +50,7 @@ const Customers = () => {
 
     const save = () => {
 
-        axios.post('http://localhost/fleet_manage/backend/Customers/addcustomers', {
-            // role: role,
+        axios.post('http://localhost/fleet/backend/Customers/addcustomers', {
             name: name,
             phone: phone,
             email: email,
@@ -74,30 +74,30 @@ const Customers = () => {
             setstatus('')
             setTimeout(() => setmsg(''), 5000)
             getdata()
-            setTimeout(() => navigate('/customers_management') )
+            setTimeout(() => navigate('/customers_management'))
         })
     }
 
 
-    const deletecustomers = (id) => {
-        axios.post('http://localhost/fleet_manage/backend/Customers/deletecustomers', {
-            id: id
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
-            }
-        }).then(function (response) {
-            let data = response.data;
-            setmsg(data.msg)
-            getdata()
-        })
-    }
+    // const deletecustomers = (id) => {
+    //     axios.post('http://localhost/fleet/backend/Customers/deletecustomers', {
+    //         id: id
+    //     }, {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': localStorage.getItem('token')
+    //         }
+    //     }).then(function (response) {
+    //         let data = response.data;
+    //         setmsg(data.msg)
+    //         getdata()
+    //     })
+    // }
 
-    const editcustomers = (id) => {
-        navigate('/customersedit/' + id)
+    // const editcustomers = (id) => {
+    //     navigate('/customersedit/' + id)
 
-    }
+    // }
 
     return (
         <div className="hold-transition sidebar-mini">
@@ -133,23 +133,9 @@ const Customers = () => {
                                             <h4>{msg}</h4>
                                             <table className='table table-bordered'>
                                                 <tbody>
-
-                                                    {/* <tr>
-                                                        <th>Role</th>
-                                                        <td>
-                                                            <select onChange={(e) => setrole(e.target.value)} className='form-control' >
-                                                                <option value=''>Select Role</option>
-
-                                                                <option value='admin'>Admin</option>
-                                                                <option value='users'>Users</option>
-                                                                <option value='drivers'>Drivers</option>
-
-                                                            </select>
-                                                        </td>
-                                                    </tr> */}
                                                     <tr>
                                                         <th>Name</th>
-                                                        <td><input type='text' className='form-control' onChange={(e) => setname(e.target.value)} value={name} required/></td>
+                                                        <td><input type='text' className='form-control' onChange={(e) => setname(e.target.value)} value={name} required /></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Phone</th>

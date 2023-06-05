@@ -23,7 +23,7 @@ const Parts_stock_in = () => {
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Partsin/get_parts',
+            url: 'http://localhost/fleet/backend/Partsin/get_parts',
             responseType: 'json'
         }).then(function (response) {
             setparts(response.data.list)
@@ -35,7 +35,7 @@ const Parts_stock_in = () => {
     const getpartsName = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Partsin/get_partsName',
+            url: 'http://localhost/fleet/backend/Partsin/get_partsName',
             responseType: 'json'
         }).then(function (response) {
             setpartsName(response.data.Namelist)
@@ -50,7 +50,7 @@ const Parts_stock_in = () => {
 
     const save = () => {
 
-        axios.post('http://localhost/fleet_manage/backend/Partsin/get_stock_in', {
+        axios.post('http://localhost/fleet/backend/Partsin/get_stock_in', {
 
             parts_id: id,
             price: price,
@@ -80,7 +80,7 @@ const Parts_stock_in = () => {
     }
 
     const deleteParts = (d) => {
-        axios.post('http://localhost/fleet_manage/backend/Partsin/deleteGet_stock_in', {
+        axios.post('http://localhost/fleet/backend/Partsin/deleteGet_stock_in', {
             id: d
         }, {
             headers: {
@@ -96,7 +96,7 @@ const Parts_stock_in = () => {
 
 
     // const deleteuser = (id) => {
-    //     axios.post('http://localhost/fleet_manage/backend/User/deleteuser', {
+    //     axios.post('http://localhost/fleet/backend/User/deleteuser', {
     //         id: id
     //     }, {
     //         headers: {

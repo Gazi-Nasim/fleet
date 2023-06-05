@@ -17,7 +17,7 @@ const List = () => {
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/User',
+            url: 'http://localhost/fleet/backend/User',
             responseType: 'json'
         }).then(function (response) {
             setList(response.data.list)
@@ -28,7 +28,7 @@ const List = () => {
     }, []);
     const save = () => {
         if (type == 'insert') {
-            axios.post('http://localhost/fleet_manage/backend/User/adduser', {
+            axios.post('http://localhost/fleet/backend/User/adduser', {
                 email: email,
                 password: pass,
                 name: name,
@@ -49,7 +49,7 @@ const List = () => {
                 getdata()
             })
         } else {
-            axios.post('http://localhost/fleet_manage/backend/User/updateuser', {
+            axios.post('http://localhost/fleet/backend/User/updateuser', {
                 email: email,
                 password: pass,
                 name: name,
@@ -75,7 +75,7 @@ const List = () => {
     }
 
     const deleteuser = (id) => {
-        axios.post('http://localhost/fleet_manage/backend/User/deleteuser', {
+        axios.post('http://localhost/fleet/backend/User/deleteuser', {
             id: id
         }, {
             headers: {
@@ -90,21 +90,8 @@ const List = () => {
     }
     const edituser = (id) => {
         navigate('/edit/' + id)
-        //     setid(id)
-        //     settype('update')
-        //     axios.post('http://localhost/fleet_manage/backend/User/edituser', {
-        //     id: id
-        //   },{
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //       'Authorization':localStorage.getItem('token')
-        //     }
-        //   }).then(function (response) {
-        //     let data=response.data;
-        //     setname(data.user.name)
-        //     setemail(data.user.email)
-        //   })
     }
+
     return (
         <div className="hold-transition sidebar-mini">
             <div className="wrapper">
@@ -154,8 +141,8 @@ const List = () => {
                                                             <td>{d.email}</td>
                                                             <td>
                                                                 <i class="fa-sharp fa-solid fa-trash btn btn-danger btn-sm" onClick={() => deleteuser(d.id)}></i>
-                                                                <br/>
-                                                                
+                                                                <br />
+
                                                                 <i class="fa-sharp fa-solid fa-pen-to-square btn btn-success btn-sm" onClick={() => edituser(d.id)}></i>
 
                                                             </td>
@@ -190,7 +177,6 @@ const List = () => {
 
                                                         </select>
                                                         </td>
-                                                        {/* <td><input type='text' className='form-control' onChange={(e) => setname(e.target.value)} value={name} /></td> */}
                                                     </tr>
                                                     <tr>
                                                         <th>Email</th>

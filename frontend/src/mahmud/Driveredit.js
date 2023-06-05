@@ -4,10 +4,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Footer from '../Footer';
 import Menu from '../Menu'
 
-export default function Driveredit() {
+const Driveredit = () => {
   const [id, setid] = useState('');
   const [name, setname] = useState('');
-  // const [role, setrole] = useState('');
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
   const [phone, setphone] = useState('');
@@ -25,7 +24,7 @@ export default function Driveredit() {
   const p = useParams();
   const navigate = useNavigate();
   useEffect(() => {
-    axios.post('http://localhost/fleet_manage/backend/Driver_controller/editdriver', {
+    axios.post('http://localhost/fleet/backend/Driver_controller/editdriver', {
       id: p.id
     }, {
       headers: {
@@ -47,7 +46,6 @@ export default function Driveredit() {
       setreference(data.user.reference);
       setaddress(data.user.address);
       setstatus(data.user.status);
-      // setrole(data.user.role);
       setphoto(data.user.photo);
       setdocument(data.user.documents);
       setid(data.user.admin_id);
@@ -55,11 +53,9 @@ export default function Driveredit() {
   }, []);
   const update = () => {
     const formdata = new FormData();
-    // formdata.append('admin_id',admin_id);
     formdata.append('name', name);
     formdata.append('email', email);
     formdata.append('password', password);
-    // formdata.append('role',role);
     formdata.append('phone', phone);
     formdata.append('age', age);
     formdata.append('license_no', license_no);
@@ -72,45 +68,14 @@ export default function Driveredit() {
     formdata.append('photo', photo);
     formdata.append('documents', documents);
     formdata.append('id', id);
-    fetch("http://localhost/fleet_manage/backend/Driver_controller/updatedriver", {
+    fetch("http://localhost/fleet/backend/Driver_controller/updatedriver", {
       method: 'POST',
       body: formdata
     },
     )
       .then((response) => response.json())
       .then((data) => console.log(data));
-    // let data = response.data;
-    //   setmsg(data.msg)
     setTimeout(() => navigate('/driverlist'), 5000);
-
-
-    // axios.post('http://localhost/fleet_manage/backend/Driver_controller/updatedriver', {
-    //   role: role,
-    //   name: name,
-    //   email: email,
-    //   phone: phone,
-    //   age: age,
-    //   license_no: license_no,
-    //   license_expire_date: license_expire_date,
-    //   experience: experience,
-    //   joining_date: joining_date,
-    //   reference: reference,
-    //   address: address,
-    //   status: status,
-    //   photo: photo,
-    //   document: document,
-    //   id: p.id
-    // }, {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': localStorage.getItem('token')
-    //   }
-    // }).then(function (response) {
-    //   let data = response.data;
-    //   setmsg(data.msg)
-    //   setTimeout(() => navigate('/driverlist'), 5000)
-
-    // })
   }
   return (<div className="hold-transition sidebar-mini">
     <div className="wrapper">
@@ -175,15 +140,13 @@ export default function Driveredit() {
                               <div className="input-group">
                                 <div className="custom-file">
                                   <input type="file" name="documents" className="custom-file-input" id="exampleInputFile" onChange={(e) => setdocument(e.target.files[0])} />
-                                  <label className="custom-file-label" for="exampleInputFile">Choose file</label>                                
-                                </div>                             
+                                  <label className="custom-file-label" for="exampleInputFile">Choose file</label>
+                                </div>
                               </div>
-                              <label for="exampleInputEmail1"><img src={`http://localhost/fleet_manage/backend/uploads/${documents}`} alt="" height={50} weidth={50} /> </label>
+                              <label for="exampleInputEmail1"><img src={`http://localhost/fleet/backend/uploads/${documents}`} alt="" height={50} weidth={50} /> </label>
                             </div>
                             <div className="form-group">
                               <label for="exampleInputEmail1">Status</label>
-                              {/* <input type="text" name="status" className="form-control" id="exampleInputEmail1" onChange={(e) => setstatus(e.target.value
-                              )} value={status} /> */}
 
                               {(status == 'active') ? <>
                                 <input type="radio" name="status" className="" id="exampleInputEmail1" onChange={(e) => setstatus(e.target.value)} checked value='active' />
@@ -202,8 +165,6 @@ export default function Driveredit() {
                                 <label>InActive</label>
                               </>
                               }
-                              {/* <br></br>
-                              {(status == 'active') ? <>To Inactive Click on <strong>Inactive</strong> </> : <>To Active Click on <strong>Active</strong> </>} */}
                             </div>
                           </div>
                           <div className="col-6">
@@ -240,8 +201,8 @@ export default function Driveredit() {
                                   <label className="custom-file-label" for="exampleInputFile">Choose file</label>
                                 </div>
                               </div>
-                              <label for="exampleInputEmail1"><img src={`http://localhost/fleet_manage/backend/uploads/${photo}`} alt="" height={50} weidth={50} /> </label>
-                            </div>  
+                              <label for="exampleInputEmail1"><img src={`http://localhost/fleet/backend/uploads/${photo}`} alt="" height={50} weidth={50} /> </label>
+                            </div>
                           </div>
 
 
@@ -254,8 +215,6 @@ export default function Driveredit() {
                         </div>
 
                       </div>
-
-
                       <div className="card-footer">
 
                       </div>
@@ -277,3 +236,4 @@ export default function Driveredit() {
   </div>
   )
 }
+export default Driveredit;

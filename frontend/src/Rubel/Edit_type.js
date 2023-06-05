@@ -5,52 +5,53 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Menu from '../Menu';
 import Footer from '../Footer';
 
-export default function Edit_type() {
-    const navigate = useNavigate();
-    const d = useParams();
-    const [title, settitle] = useState("");
-    const [msg, setmsg] = useState("");
-    useEffect(()=>{
-        axios.post('http://localhost/fleet_manage/backend/Rubel/editvehicle_type', {
-            id: d.id,
-          },{
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization':localStorage.getItem('token')
-            },
-        }
-        )
-        .then(function(response){
-            let data=response.data;
-            console.log(data)
-             settitle(data.user.title);
-            
-        })
-    },[]);
-    const update=()=> {
-      axios.post('http://localhost/fleet_manage/backend/Rubel/updatevehicle_type', {
-          title: title,
-          id: d.id
-    },{
+const Edit_type = () => {
+  const navigate = useNavigate();
+  const d = useParams();
+  const [title, settitle] = useState("");
+  const [msg, setmsg] = useState("");
+  
+  useEffect(() => {
+    axios.post('http://localhost/fleet/backend/Rubel/editvehicle_type', {
+      id: d.id,
+    }, {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization':localStorage.getItem('token')
+        'Authorization': localStorage.getItem('token')
+      },
+    }
+    )
+      .then(function (response) {
+        let data = response.data;
+        console.log(data)
+        settitle(data.user.title);
+
+      })
+  }, []);
+  const update = () => {
+    axios.post('http://localhost/fleet/backend/Rubel/updatevehicle_type', {
+      title: title,
+      id: d.id
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
       }
     }).then(function (response) {
-      let data=response.data;
+      let data = response.data;
       setmsg(data.msg)
-      setTimeout(()=>navigate('/typelist'), 5000)
-      
-       
-              
+      setTimeout(() => navigate('/typelist'), 5000)
+
+
+
     })
   }
   return (
-    
+
     <>
-        <div className="hold-transition sidebar-mini">
+      <div className="hold-transition sidebar-mini">
         <div className="wrapper">
-          <Menu/>
+          <Menu />
           <div className="content-wrapper">
             <div className="content-header">
               <div className="container-fluid">
@@ -93,7 +94,7 @@ export default function Edit_type() {
                                 />
                               </td>
                             </tr>
-                            
+
                             <tr>
                               <td colSpan={2}>
                                 <input
@@ -104,7 +105,7 @@ export default function Edit_type() {
                                 />
                               </td>
                             </tr>
-                     
+
                           </tbody>
                         </table>
                       </div>
@@ -114,9 +115,10 @@ export default function Edit_type() {
               </div>
             </div>
           </div>
-          <Footer/>
+          <Footer />
         </div>
       </div>
     </>
   );
 }
+export default Edit_type;

@@ -16,7 +16,7 @@ const Parts = () => {
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet_manage/backend/Partsmanage',
+            url: 'http://localhost/fleet/backend/Partsmanage',
             responseType: 'json'
         }).then(function (response) {
             setParts(response.data.parts_list)
@@ -28,7 +28,7 @@ const Parts = () => {
 
     const save = () => {
         if (type == 'insert') {
-            axios.post('http://localhost/fleet_manage/backend/Partsmanage/add_parts', {
+            axios.post('http://localhost/fleet/backend/Partsmanage/add_parts', {
                 name: name,
                 details: details,
                 status: status
@@ -46,7 +46,7 @@ const Parts = () => {
                 getdata()
             })
         } else {
-            axios.post('http://localhost/fleet_manage/backend/Partsmanage/update_parts', {
+            axios.post('http://localhost/fleet/backend/Partsmanage/update_parts', {
                 name: name,
                 details: details,
                 status: status,
@@ -74,7 +74,7 @@ const Parts = () => {
         navigate('/parts_edit/' + id)
         //  setid(id)
         //  settype('update')
-        //  axios.post('http://localhost/fleet_manage/backend/Parts/edit_parts', {
+        //  axios.post('http://localhost/fleet/backend/Parts/edit_parts', {
         //      id: id
         //    },{
         //      headers: {
@@ -90,7 +90,7 @@ const Parts = () => {
     }
 
     const delete_parts = (id) => {
-        axios.post('http://localhost/fleet_manage/backend/Partsmanage/delete_parts', {
+        axios.post('http://localhost/fleet/backend/Partsmanage/delete_parts', {
             id: id
         }, {
             headers: {
