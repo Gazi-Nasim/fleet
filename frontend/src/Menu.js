@@ -19,6 +19,7 @@ const Menu = () => {
     const [isActive7, setIsActive7] = useState('nav-link');
     const [isActive8, setIsActive8] = useState('nav-link');
     const [isActive9, setIsActive9] = useState('nav-link');
+    const [isActive10, setIsActive10] = useState('nav-link');
 
     const [mm, setmm] = useState('');
     const [op, setop] = useState('nav-item');
@@ -31,6 +32,7 @@ const Menu = () => {
     const [oc, setoc] = useState('nav-item');
     const [rm, setrm] = useState('nav-item');
     const [sr, setsr] = useState('nav-item');
+    const [us, setus] = useState('nav-item');
 
     const handleMenu = (e) => {
         setIsActive('nav-link active');
@@ -72,6 +74,10 @@ const Menu = () => {
         setIsActive9('nav-link active');
         localStorage.setItem('menu', 'service')
     }
+    const handleMenu10 = (e) => {
+        setIsActive10('nav-link active');
+        localStorage.setItem('menu', 'user')
+    }
 
 
     useEffect(() => {
@@ -89,6 +95,7 @@ const Menu = () => {
                 setIsActive7('nav-link');
                 setIsActive8('nav-link');
                 setIsActive9('nav-link');
+                setIsActive10('nav-link');
 
                 setop('nav-item menu-open')
                 setor('nav-item')
@@ -100,6 +107,7 @@ const Menu = () => {
                 setoc('nav-item ')
                 setrm('nav-item ')
                 setsr('nav-item ')
+                setus('nav-item ')
             }
             if (mmm == 'report') {
                 setIsActive('nav-link');
@@ -318,6 +326,32 @@ const Menu = () => {
                 setoc('nav-item ')
                 setrm('nav-item ')
                 setsr('nav-item menu-open')
+
+            }
+            if (mmm == 'user') {
+                setIsActive('nav-link');
+                setIsActive1('nav-link');
+                setIsActive2('nav-link');
+                setIsActive3('nav-link');
+                setIsActive4('nav-link');
+                setIsActive5('nav-link');
+                setIsActive6('nav-link');
+                setIsActive7('nav-link');
+                setIsActive8('nav-link ');
+                setIsActive9('nav-link ');
+                setIsActive10('nav-link active');
+
+                setop('nav-item ')
+                setor('nav-item ')
+                setof('nav-item ')
+                setob('nav-item ')
+                setov('nav-item ')
+                setom('nav-item ')
+                setod('nav-item ')
+                setoc('nav-item ')
+                setrm('nav-item ')
+                setsr('nav-item ')
+                setus('nav-item menu-open')
 
             }
         }
@@ -778,9 +812,9 @@ const Menu = () => {
                                 
                             </li>
 
-                            <li className="nav-item">
+                            <li className={us}>
 
-                                <NavLink to="/admin" className="nav-link">
+                                <NavLink to="/admin" className="nav-link" onClick={handleMenu10}>
                                     <i className="nav-icon fa-sharp fa-solid fa-users"></i>
                                     <p>
                                         User List

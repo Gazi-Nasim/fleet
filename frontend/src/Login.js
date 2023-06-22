@@ -69,13 +69,23 @@ const Login = () => {
                                 <div className="col-4">
                                     <button type="submit" className="btn btn-primary btn-block" onClick={login}>Sign In</button>
                                 </div>
-                                <h5>To login use admin@email.com / user@email.com / drier@email.com</h5>
-                                <h5>Password To Login 12345 </h5>
 
                             </div>
                         </div>
                     </div>
                 </div>
+                <p>
+                    Username: admin@email.com
+                </p>
+                <p>
+                    Username: user@email.com
+                </p>
+                <p>
+                    Username: driver@gmail.com
+                </p>
+                <p>
+                    Password: 12345
+                </p>
             </div>
         </>
     );
