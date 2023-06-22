@@ -701,7 +701,6 @@ const Menu = () => {
                             <li className={or}>
                                 <a href="" className={isActive1}>
                                     <i className="nav-icon fa-solid fa-chart-pie"></i>
-
                                     <p>
                                         Income Expense
                                         <i className="fas fa-angle-left right"></i>
@@ -809,7 +808,7 @@ const Menu = () => {
                                         </NavLink>
                                     </li>
                                 </ul>
-                                
+
                             </li>
 
                             <li className={us}>
