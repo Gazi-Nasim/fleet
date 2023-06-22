@@ -23,7 +23,7 @@ export default function Editmaintenance() {
         //-----vehicle----------
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Maintenance/getVehicle',
+            url: 'http://fleet.prantiksoft.com/backend/Maintenance/getVehicle',
             responseType: 'json'
         }).then(function (response) {
 
@@ -33,7 +33,7 @@ export default function Editmaintenance() {
         ////----------Vendor-------
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Maintenance/getVendor',
+            url: 'http://fleet.prantiksoft.com/backend/Maintenance/getVendor',
             responseType: 'json'
         }).then(function (response) {
             setVendor(response.data.vendor)
@@ -41,7 +41,7 @@ export default function Editmaintenance() {
 
 
         //------edit----------
-        axios.post('http://localhost/fleet/backend/Maintenance/editMaintenance', {
+        axios.post('http://fleet.prantiksoft.com/backend/Maintenance/editMaintenance', {
             id: p.id
         }, {
             headers: {
@@ -68,7 +68,7 @@ export default function Editmaintenance() {
     const save = () => {
         axios
             .post(
-                "http://localhost/fleet/backend/Maintenance/updatemaintenance",
+                "http://fleet.prantiksoft.com/backend/Maintenance/updatemaintenance",
                 {
                     vendor_id: vendorid,
                     vehicle_id: vehicleid,
@@ -90,7 +90,7 @@ export default function Editmaintenance() {
                 let data = response.data;
                 // console.log (data);
                 setmsg(data.msg);
-                setTimeout(() => navigate("/maintenance"), 3000);
+                setTimeout(() => navigate("/list"), 3000);
             });
     };
 

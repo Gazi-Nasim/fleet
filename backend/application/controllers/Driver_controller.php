@@ -204,31 +204,79 @@ class Driver_controller extends CI_Controller
         //     $this->output->set_content_type('application/json')->set_output(json_encode(['msg' => $ex->getMessage(), 'status' => false]));
         // }
     }
-    public function adminlist()
-    { {
-            $data = $this->Driver_model->adminlist();
-            $this->output->set_content_type('application/json')->set_output(json_encode(['admin' => $data, 'status' => true]));
-        }
+  
+
+
+    // public function file()
+    // {
+    //     $config['upload_path'] = './uploads';
+    //     $config['allowed_types'] = 'gif|jpg|png|pdf';
+
+    //     $this->load->library('upload', $config);
+    //     $this->upload->initialize($config);
+    //     if (!$this->upload->do_upload('photo')) {
+    //         $error = array('error' => $this->upload->display_errors());
+    //         $this->output->set_content_type('application/json')->set_output(json_encode(['msg' => $error, 'status' => false]));
+
+
+    //     } else {
+    //         $data = array('upload_data' => $this->upload->data());
+    //         $this->output->set_content_type('application/json')->set_output(json_encode(['msg' => $data, 'status' => true]));
+
+
+    //     }
+    // }
+
+    public function driverlist()
+    { 
+            $data = $this->Driver_model->driver_list();
+            $this->output->set_content_type('application/json')->set_output(json_encode(['driver' => $data, 'status' => true]));
+            //  var_dump($data);
+        
     }
 
-
-    public function file()
+    public function driver_Details()
     {
-        $config['upload_path'] = './uploads';
-        $config['allowed_types'] = 'gif|jpg|png|pdf';
+        
+        // $header = apache_request_headers();
+        // $token=$header['Authorization'];
+        try{
+            // $decoded=JWT::decode($token,new Key($this->config->item('encryption_key'),'HS256'));
+            // Your section starts here
+            $data=json_decode(file_get_contents("php://input"),true);
+            $d=[];
+            if($data['startDate']!=''){
+                $std=date_create($data['startDate']);
+                $etd=date_create($data['endDate']);
+                $int=new DateInterval('P1D');
+                $rang=new DatePeriod($std,$int,$etd);
+                foreach($rang as $r){
+                    $t=$this->Driver_model->get_driverdetails($data['driverid'],$r->format('Y-m-d'));
+                    if ($t!=null) {
+                        $d[]=$t;
+                    }
+                }
+            }else{
+                $std=date_create(date('Y-m'.'-01'));
+                $etd=date_create(date('Y-m-d'));
+                $int=new DateInterval('P1D');
+                $rang=new DatePeriod($std,$int,$etd);
+                foreach($rang as $r){
+                    $t=$this->Driver_model->get_driverdetails($data['driverid'],$r->format('Y-m-d'));
+                    if ($t!=null) {
+                        $d[]=$t;
+                    }
+                }                  
+            }
 
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
-        if (!$this->upload->do_upload('photo')) {
-            $error = array('error' => $this->upload->display_errors());
-            $this->output->set_content_type('application/json')->set_output(json_encode(['msg' => $error, 'status' => false]));
-
-
-        } else {
-            $data = array('upload_data' => $this->upload->data());
-            $this->output->set_content_type('application/json')->set_output(json_encode(['msg' => $data, 'status' => true]));
-
-
+            $this->output->set_content_type('application/json')->set_output(json_encode(['driverdetails'=>$d,'status'=>true]));
+            // Your section ends here
+        }catch(ExpiredException $e){
+            $this->output->set_content_type('application/json')->set_output(json_encode(['msg'=>$e->getMessage(),'status'=>false]));
+        }catch(SignatureInvalidException $s){
+            $this->output->set_content_type('application/json')->set_output(json_encode(['msg'=>$s->getMessage(),'status'=>false]));
+        }catch(Exception $ex){
+            $this->output->set_content_type('application/json')->set_output(json_encode(['msg'=>$ex->getMessage(),'status'=>false]));
         }
     }
 }

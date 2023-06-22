@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 import Menu from '../Menu';
 
-const Payment = () => {
+export default function Payment() {
 
     const [Vnm, setVehi] = useState([]);
     const [Vname, setVehiNM] = useState('');
@@ -18,11 +18,11 @@ const Payment = () => {
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Payment_c/VehicleName',
+            url: 'http://fleet.prantiksoft.com/backend/Payment_c/VehicleName',
             responseType: 'json'
         }).then(function (response) {
             let VnmN = response.data.vehicl;
-            setVehi(VnmN)
+            setVehi(VnmN);
         });
     }
 
@@ -38,8 +38,14 @@ const Payment = () => {
         }
     }, []);
 
+
+    // if(!Vname||!email||){
+
+    // }else{
+
+    // }
     const save = () => {
-        axios.post('http://localhost/fleet/backend/Payment_c/saveVehi', {
+        axios.post('http://fleet.prantiksoft.com/backend/Payment_c/saveVehi', {
 
             vehicle_id: Vname,
             trans_date: email,
@@ -59,7 +65,7 @@ const Payment = () => {
             setRmrk('');
             setAmnt('');
             setType('');
-            getPmnt();
+            getPmnt('');
         })
     }
 
@@ -67,12 +73,11 @@ const Payment = () => {
     const getPmnt = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Payment_c/pmntGet',
+            url: 'http://fleet.prantiksoft.com/backend/Payment_c/pmntGet',
             responseType: 'json'
         }).then(function (response) {
             let pmnt = response.data.pmnts;
             setPmnts(pmnt);
-            console.log(pmnt);
         });
     }
 
@@ -80,28 +85,6 @@ const Payment = () => {
         getPmnt();
     }, []);
 
-
-    const deletePemnt = (id) => {
-        axios.post('http://localhost/fleet/backend/Payment_c/deletPmnt', {
-            id: id
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
-            }
-        }).then(function (response) {
-            let data = response.data;
-            setmsg(data.msg);
-            getPmnt();
-        })
-
-    }
-
-
-    const editPemnt = (id) => {
-        navigate('/editpay/' + id);
-
-    }
 
     return (
         <div className="hold-transition sidebar-mini">
@@ -112,12 +95,12 @@ const Payment = () => {
                         <div className="container-fluid">
                             <div className="row mb-2">
                                 <div className="col-sm-6">
-                                    <h1 className="m-0">Additional Expense</h1>
+                                    <h1 className="m-0">Starter Page</h1>
                                 </div>
                                 <div className="col-sm-6">
                                     <ol className="breadcrumb float-sm-right">
                                         <li className="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li className="breadcrumb-item active">Add Expense</li>
+                                        <li className="breadcrumb-item active">Starter Page</li>
                                     </ol>
                                 </div>
                             </div>
@@ -126,108 +109,66 @@ const Payment = () => {
 
                     <div className="content">
                         <div className="container-fluid">
-
                             <div className="row">
-
-                                <div className="col-lg-12">
+                                <div className="col-12">
                                     <div className="card card-primary card-outline">
                                         <div className="card-header">
-                                            <h5 className="m-0">Add Expense</h5>
+                                            <h5 className="m-0">Add New</h5>
                                         </div>
-                                        <div className="card-body">
-                                            <h4>{msg}</h4>
-                                            <table className='table table-bordered'>
-                                                <tbody>
-                                                    <tr>
-                                                        <th>Vehicle Name</th>
-                                                        <td>
-                                                            <select className='form-control' onChange={(e) => setVehiNM(e.target.value)} value={Vname} >
-                                                                <option value='' key=''>Select One</option>
-                                                                {Vnm.map((d, i) =>
-                                                                    <option value={`${d.id}`} key={i} >{d.name} </option>
-                                                                )}
-                                                            </select>
+                                        <div className="card-body row">
+                                            <div className='form-control'>
+                                                <h4 style={{textAlign:'center', color: 'green' }} >{msg}</h4>
+                                            </div>
 
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Transjection date</th>
-                                                        <td><input type='date' className='form-control' onChange={(e) => seteDate(e.target.value)} value={email} /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Amount</th>
-                                                        <td><input type='number' className='form-control' onChange={(e) => setAmnt(e.target.value)} value={amnt} /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Remarks</th>
-                                                        <td><input type='text' className='form-control' onChange={(e) => setRmrk(e.target.value)} value={rmRk} /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Type</th>
-                                                        <td>
-                                                            {/* <input type="radio" id="html" name="fav_language" value={'income'} onChange={(e) => setType(e.target.value)} />
-                                                            <label >Income</label> */}
-                                                            <input type="radio" id="html" name="fav_language" value={'expense'} onChange={(e) => setType(e.target.value)} />
-                                                            <label >Expense</label><br />
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colSpan={2}><input type='submit' className='btn btn-block btn-primary' value="Save" onClick={save} /></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                            <div className='col-6'>
+                                                <div>
+                                                    <label>Vehicle Name</label>
+                                                    <select className='form-control' onChange={(e) => setVehiNM(e.target.value)} value={Vname} >
+                                                        <option value='' key=''>Select One</option>
+                                                        {Vnm.map((d, i) =>
+                                                            <option value={`${d.id}`} key={i} >{d.name} </option>
+                                                        )}
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label>Transjection Date</label>
+                                                    <input type='date' className='form-control' onChange={(e) => seteDate(e.target.value)} value={email} />
+                                                </div>
+                                                <div>
+                                                    <label>Amount</label>
+                                                    <input type='number' className='form-control' onChange={(e) => setAmnt(e.target.value)} value={amnt} />
+                                                </div>
+                                            </div>
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-12">
-                                    <div className="card card-primary card-outline">
-                                        <div className="card-header">
-                                            <h5 className="m-0">Payment Expense List</h5>
-                                        </div>
-                                        <div className="card-body">
-                                            <table className='table table-bordered'>
-                                                <thead>
-                                                    <tr>
-                                                        <th>SL</th>
-                                                        <th>Vehicle Name</th>
-                                                        <th>Tranjection Date</th>
-                                                        <th>Amount</th>
-                                                        <th>Remerks</th>
-                                                        <th>Type</th>
-                                                        <th colSpan={2}>Action</th>
-                                                    </tr>
-                                                </thead>
+                                            <div className='col-6'>
+                                                <div>
+                                                    <label>Remarks</label>
+                                                    <input type='text' className='form-control' onChange={(e) => setRmrk(e.target.value)} value={rmRk} />
+                                                </div>
 
-                                                <tbody>
-                                                    {pmnts.map((d, i) =>
-
-                                                        <tr key={i}>
-                                                            <td>{i + 1}</td>
-                                                            <td>{d.name}</td>
-                                                            <td>{d.trans_date}</td>
-                                                            <td>{d.amount}</td>
-                                                            <td>{d.remarks}</td>
-                                                            <td>{d.type}</td>
-                                                            <td>
-                                                                <button className='btn btn-primary btn-sm' onClick={() => editPemnt(d.id)}  > Edit</button>
-
-                                                            </td>
-                                                            <td>
-                                                                <button className='btn btn-danger btn-sm' onClick={() => deletePemnt(d.id)}  > Delete</button>
-                                                            </td>
-                                                        </tr>
-                                                    )}
-                                                </tbody>
-                                            </table>
+                                                <div>
+                                                    <label>Type</label>
+                                                    <div>
+                                                        <input type="radio" id="html" name="fav_language" value={'income'} onChange={(e) => setType(e.target.value)} />
+                                                        <label for='html' >Income</label>
+                                                        <input type="radio" id="htmls" name="fav_language" value={'expense'} onChange={(e) => setType(e.target.value)} />
+                                                        <label for='htmls' >Expense</label><br/>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div>
+                                                        <label></label>
+                                                        <input type='submit' className='btn btn-block btn-primary' value="Save" onClick={save} />
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         </div>
+
                                     </div>
                                 </div>
 
                             </div>
-
-
 
                         </div>
                     </div>
@@ -237,6 +178,6 @@ const Payment = () => {
                 <Footer />
             </div>
         </div>
+
     );
 }
-export default Payment;

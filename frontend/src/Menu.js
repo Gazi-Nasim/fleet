@@ -6,6 +6,7 @@ const Menu = () => {
     const navigate = useNavigate();
     const logout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('name');
         navigate('/')
     }
     const [isActive, setIsActive] = useState('nav-link');
@@ -16,6 +17,8 @@ const Menu = () => {
     const [isActive5, setIsActive5] = useState('nav-link');
     const [isActive6, setIsActive6] = useState('nav-link');
     const [isActive7, setIsActive7] = useState('nav-link');
+    const [isActive8, setIsActive8] = useState('nav-link');
+    const [isActive9, setIsActive9] = useState('nav-link');
 
     const [mm, setmm] = useState('');
     const [op, setop] = useState('nav-item');
@@ -26,6 +29,8 @@ const Menu = () => {
     const [om, setom] = useState('nav-item');
     const [od, setod] = useState('nav-item');
     const [oc, setoc] = useState('nav-item');
+    const [rm, setrm] = useState('nav-item');
+    const [sr, setsr] = useState('nav-item');
 
     const handleMenu = (e) => {
         setIsActive('nav-link active');
@@ -59,6 +64,14 @@ const Menu = () => {
         setIsActive7('nav-link active');
         localStorage.setItem('menu', 'customer')
     }
+    const handleMenu8 = (e) => {
+        setIsActive8('nav-link active');
+        localStorage.setItem('menu', 'reminder')
+    }
+    const handleMenu9 = (e) => {
+        setIsActive9('nav-link active');
+        localStorage.setItem('menu', 'service')
+    }
 
 
     useEffect(() => {
@@ -74,6 +87,8 @@ const Menu = () => {
                 setIsActive5('nav-link');
                 setIsActive6('nav-link');
                 setIsActive7('nav-link');
+                setIsActive8('nav-link');
+                setIsActive9('nav-link');
 
                 setop('nav-item menu-open')
                 setor('nav-item')
@@ -83,6 +98,8 @@ const Menu = () => {
                 setom('nav-item ')
                 setod('nav-item ')
                 setoc('nav-item ')
+                setrm('nav-item ')
+                setsr('nav-item ')
             }
             if (mmm == 'report') {
                 setIsActive('nav-link');
@@ -93,6 +110,8 @@ const Menu = () => {
                 setIsActive5('nav-link');
                 setIsActive6('nav-link');
                 setIsActive7('nav-link');
+                setIsActive8('nav-link');
+                setIsActive9('nav-link');
 
                 setop('nav-item ')
                 setor('nav-item menu-open')
@@ -102,6 +121,8 @@ const Menu = () => {
                 setom('nav-item ')
                 setod('nav-item ')
                 setoc('nav-item ')
+                setrm('nav-item ')
+                setsr('nav-item ')
 
             }
             if (mmm == 'fuel') {
@@ -113,6 +134,8 @@ const Menu = () => {
                 setIsActive5('nav-link');
                 setIsActive6('nav-link');
                 setIsActive7('nav-link');
+                setIsActive8('nav-link');
+                setIsActive9('nav-link');
 
 
                 setop('nav-item ')
@@ -123,6 +146,8 @@ const Menu = () => {
                 setom('nav-item ')
                 setod('nav-item ')
                 setoc('nav-item ')
+                setrm('nav-item ')
+                setsr('nav-item ')
 
             }
             if (mmm == 'bookings') {
@@ -134,6 +159,8 @@ const Menu = () => {
                 setIsActive5('nav-link');
                 setIsActive6('nav-link');
                 setIsActive7('nav-link');
+                setIsActive8('nav-link');
+                setIsActive9('nav-link');
 
 
                 setop('nav-item ')
@@ -144,6 +171,8 @@ const Menu = () => {
                 setom('nav-item ')
                 setod('nav-item ')
                 setoc('nav-item ')
+                setrm('nav-item ')
+                setsr('nav-item ')
 
             }
             if (mmm == 'vehicle') {
@@ -155,6 +184,8 @@ const Menu = () => {
                 setIsActive5('nav-link');
                 setIsActive6('nav-link');
                 setIsActive7('nav-link');
+                setIsActive8('nav-link');
+                setIsActive9('nav-link');
 
                 setop('nav-item ')
                 setor('nav-item ')
@@ -164,6 +195,8 @@ const Menu = () => {
                 setom('nav-item ')
                 setod('nav-item ')
                 setoc('nav-item ')
+                setrm('nav-item ')
+                setsr('nav-item ')
 
             }
             if (mmm == 'maintenance') {
@@ -175,6 +208,8 @@ const Menu = () => {
                 setIsActive5('nav-link active');
                 setIsActive6('nav-link');
                 setIsActive7('nav-link');
+                setIsActive8('nav-link');
+                setIsActive9('nav-link');
 
                 setop('nav-item ')
                 setor('nav-item ')
@@ -184,6 +219,8 @@ const Menu = () => {
                 setom('nav-item menu-open')
                 setod('nav-item ')
                 setoc('nav-item ')
+                setrm('nav-item ')
+                setsr('nav-item ')
 
             }
             if (mmm == 'driver') {
@@ -195,6 +232,8 @@ const Menu = () => {
                 setIsActive5('nav-link');
                 setIsActive6('nav-link active');
                 setIsActive7('nav-link');
+                setIsActive8('nav-link');
+                setIsActive9('nav-link');
 
                 setop('nav-item ')
                 setor('nav-item ')
@@ -204,6 +243,8 @@ const Menu = () => {
                 setom('nav-item ')
                 setod('nav-item menu-open')
                 setoc('nav-item ')
+                setrm('nav-item ')
+                setsr('nav-item ')
 
             }
             if (mmm == 'customer') {
@@ -215,6 +256,8 @@ const Menu = () => {
                 setIsActive5('nav-link');
                 setIsActive6('nav-link');
                 setIsActive7('nav-link active');
+                setIsActive8('nav-link');
+                setIsActive9('nav-link');
 
                 setop('nav-item ')
                 setor('nav-item ')
@@ -224,11 +267,64 @@ const Menu = () => {
                 setom('nav-item ')
                 setod('nav-item ')
                 setoc('nav-item menu-open')
+                setrm('nav-item ')
+                setsr('nav-item ')
+
+            }
+
+            if (mmm == 'reminder') {
+                setIsActive('nav-link');
+                setIsActive1('nav-link');
+                setIsActive2('nav-link');
+                setIsActive3('nav-link');
+                setIsActive4('nav-link');
+                setIsActive5('nav-link');
+                setIsActive6('nav-link');
+                setIsActive7('nav-link');
+                setIsActive8('nav-link active');
+                setIsActive9('nav-link');
+
+                setop('nav-item ')
+                setor('nav-item ')
+                setof('nav-item ')
+                setob('nav-item ')
+                setov('nav-item ')
+                setom('nav-item ')
+                setod('nav-item ')
+                setoc('nav-item ')
+                setrm('nav-item menu-open')
+                setsr('nav-item ')
+
+            }
+            if (mmm == 'service') {
+                setIsActive('nav-link');
+                setIsActive1('nav-link');
+                setIsActive2('nav-link');
+                setIsActive3('nav-link');
+                setIsActive4('nav-link');
+                setIsActive5('nav-link');
+                setIsActive6('nav-link');
+                setIsActive7('nav-link');
+                setIsActive8('nav-link ');
+                setIsActive9('nav-link active');
+
+                setop('nav-item ')
+                setor('nav-item ')
+                setof('nav-item ')
+                setob('nav-item ')
+                setov('nav-item ')
+                setom('nav-item ')
+                setod('nav-item ')
+                setoc('nav-item ')
+                setrm('nav-item ')
+                setsr('nav-item menu-open')
 
             }
         }
         console.log(isActive)
     }, []);
+
+    const name = localStorage.getItem("name");
 
     return (
         <>
@@ -250,10 +346,10 @@ const Menu = () => {
             </nav>
             <aside className="main-sidebar sidebar-dark-primary elevation-4">
 
-                <a href="index3.html" className="brand-link">
-                    <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{ opacity: .8 }} />
-                    <span className="brand-text font-weight-light">AdminLTE 3</span>
-                </a>
+                <NavLink to="/dashboard" className="brand-link">
+                    <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{ opacity: .8 }} />
+                    <span className="brand-text font-weight-light">FMS Tracking</span>
+                </NavLink>
 
 
                 <div className="sidebar">
@@ -263,7 +359,7 @@ const Menu = () => {
                             <img src="dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image" />
                         </div>
                         <div className="info">
-                            <a href="#" className="d-block">Alexander Pierce</a>
+                            <a href="#" className="d-block">{name}</a>
                         </div>
                     </div>
 
@@ -362,6 +458,14 @@ const Menu = () => {
                                             </p>
                                         </NavLink>
                                     </li>
+                                    <li className="nav-item">
+                                        <NavLink to="/driver_report" className="nav-link" onClick={handleMenu6}>
+                                            <i className="nav-icon fas fa-th"></i>
+                                            <p>
+                                                Driver Report
+                                            </p>
+                                        </NavLink>
+                                    </li>
                                 </ul>
                             </li>
                             {/* mamun */}
@@ -414,6 +518,12 @@ const Menu = () => {
                                             <p>Booking List</p>
                                         </NavLink>
                                     </li>
+                                    <li class="nav-item">
+                                        <NavLink to="/bookingreport" className="nav-link" onClick={handleMenu3}>
+                                            <i className="nav-icon fa-solid fa-list-ul"></i>
+                                            <p>Booking Report</p>
+                                        </NavLink>
+                                    </li>
                                 </ul>
                             </li>
                             {/* sharmin apu */}
@@ -435,9 +545,25 @@ const Menu = () => {
                                 </ul>
                                 <ul className="nav nav-treeview">
                                     <li className="nav-item">
-                                        <NavLink to="/Fuel_list" className="nav-link" onClick={handleMenu2}>
+                                        <NavLink to="/fuel_list" className="nav-link" onClick={handleMenu2}>
                                             <i className="nav-icon fa-solid fa-flag"></i>
                                             <p>Fuel Status List</p>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <NavLink to="/fuel_rep" className="nav-link" onClick={handleMenu2}>
+                                            <i className="nav-icon fa-solid fa-flag"></i>
+                                            <p>Fuel Report</p>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <NavLink to="/fuel_graph" className="nav-link" onClick={handleMenu2}>
+                                            <i className="nav-icon fa-solid fa-flag"></i>
+                                            <p>Fuel Report Status</p>
                                         </NavLink>
                                     </li>
                                 </ul>
@@ -517,6 +643,24 @@ const Menu = () => {
                                             </p>
                                         </NavLink>
                                     </li>
+                                    <li className="nav-item">
+
+                                        <NavLink to="/vendorspayment" className="nav-link" onClick={handleMenu5}>
+                                            <i className="nav-icon fa-solid fa-list-ul"></i>
+                                            <p>
+                                                Vendor Payment
+                                            </p>
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+
+                                        <NavLink to="/paymentlist" className="nav-link" onClick={handleMenu5}>
+                                            <i className="nav-icon fa-solid fa-list-ul"></i>
+                                            <p>
+                                                Vendor Payment List
+                                            </p>
+                                        </NavLink>
+                                    </li>
                                 </ul>
                             </li>
                             {/* nasim */}
@@ -525,7 +669,7 @@ const Menu = () => {
                                     <i className="nav-icon fa-solid fa-chart-pie"></i>
 
                                     <p>
-                                        Additional Cost
+                                        Income Expense
                                         <i className="fas fa-angle-left right"></i>
                                     </p>
                                 </a>
@@ -537,6 +681,101 @@ const Menu = () => {
                                         </NavLink>
                                     </li>
                                 </ul>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <NavLink to="/payment_manage" className="nav-link" onClick={handleMenu1}>
+                                            <i className="nav-icon fa-solid fa-money-check-dollar"></i>
+                                            <p>Payment List</p>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <NavLink to="/additional_cost" className="nav-link" onClick={handleMenu1}>
+                                            <i className="nav-icon fa-solid fa-money-check-dollar"></i>
+                                            <p>Additional Cost</p>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <NavLink to="/income_expense_report" className="nav-link" onClick={handleMenu1}>
+                                            <i className="nav-icon fa-solid fa-money-check-dollar"></i>
+                                            <p>Income Expense Report</p>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li className={rm}>
+                                <a href="" className={isActive8}>
+                                    <i className="nav-icon fa-solid fa-chart-pie"></i>
+
+                                    <p>
+                                        Reminder
+                                        <i className="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <NavLink to="/addoil" className="nav-link" onClick={handleMenu8}>
+                                            <i className="nav-icon fa-solid fa-money-check-dollar"></i>
+                                            <p>Engine Oil Add</p>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <NavLink to="/engine_oil" className="nav-link" onClick={handleMenu8}>
+                                            <i className="nav-icon fa-solid fa-money-check-dollar"></i>
+                                            <p>Engine Oil Reminder</p>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <NavLink to="/reminder" className="nav-link" onClick={handleMenu8}>
+                                            <i className="nav-icon fa-solid fa-money-check-dollar"></i>
+                                            <p>Add Reminder</p>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <NavLink to="/reminder_management" className="nav-link" onClick={handleMenu8}>
+                                            <i className="nav-icon fa-solid fa-money-check-dollar"></i>
+                                            <p>Reminder Management</p>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+                            <li className={sr}>
+                                <a href="" className={isActive9}>
+                                    <i className="nav-icon fa-solid fa-chart-pie"></i>
+
+                                    <p>
+                                        Services
+                                        <i className="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <NavLink to="/add_service" className="nav-link" onClick={handleMenu9}>
+                                            <i className="nav-icon fa-solid fa-money-check-dollar"></i>
+                                            <p>Add Services </p>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <NavLink to="/service_list" className="nav-link" onClick={handleMenu9}>
+                                            <i className="nav-icon fa-solid fa-money-check-dollar"></i>
+                                            <p>Services list</p>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                                
                             </li>
 
                             <li className="nav-item">
@@ -545,6 +784,15 @@ const Menu = () => {
                                     <i className="nav-icon fa-sharp fa-solid fa-users"></i>
                                     <p>
                                         User List
+                                    </p>
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+
+                                <NavLink to="/tracking" className="nav-link">
+                                    <i className="nav-icon fa-sharp fa-solid fa-users"></i>
+                                    <p>
+                                        Track Vehicle
                                     </p>
                                 </NavLink>
                             </li>

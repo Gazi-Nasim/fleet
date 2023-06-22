@@ -2,26 +2,27 @@ import Menu from "../Menu";
 import Footer from "../Footer";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, redirect, useParams } from "react-router-dom";
 
 
 
-const EditPmnt = () => {
+export default function EditPmnt() {
 
-    const [Vnm, setVehi] = useState([]);
+    const [Vehicl_name, setVehi] = useState([]);
     const [carID, setcarID] = useState('');
-    const [inExid, setinExid] = useState('');
+    const [ScarD, setScarID] = useState('');
     const [Vname, setVehiNM] = useState(0);
-    const [Vdate, seteDate] = useState('');
-    const [amnt, setAmnt] = useState('');
-    const [rmRk, setRmrk] = useState('');
-    const [typ_e, setType] = useState('');
+    const [dates, seteDate] = useState('');
+    const [amount, setAmount] = useState('');
+    const [remark, setRemark] = useState('');
+    const [type, setType] = useState('');
     const [msg, setmsg] = useState('');
     const q = useParams();
     const navigate = useNavigate();
 
+
     useEffect(() => {
-        axios.post('http://localhost/fleet/backend/Payment_c/getPerId', {
+        axios.post('http://fleet.prantiksoft.com/backend/Payment_c/getPerId', {
             id: q.id
         }, {
             headers: {
@@ -31,12 +32,13 @@ const EditPmnt = () => {
         }).then(function (response) {
             let vehicleId = response.data.income_expense.vehicle_id;
             setcarID(vehicleId);
-            setinExid(response.data.income_expense.id);
-            setType(response.data.income_expense.type);
+            setScarID(response.data.income_expense.id);
             seteDate(response.data.income_expense.trans_date);
-            setAmnt(response.data.income_expense.amount);
-            setRmrk(response.data.income_expense.remarks);
-            console.log(response.data.income_expense);
+            setAmount(response.data.income_expense.amount);
+            setRemark(response.data.income_expense.remarks);
+            setType(response.data.income_expense.type);
+
+
         }
         )
     }, []);
@@ -47,11 +49,11 @@ const EditPmnt = () => {
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Payment_c/VehicleName',
+            url: 'http://fleet.prantiksoft.com/backend/Payment_c/VehicleName',
             responseType: 'json'
         }).then(function (response) {
-            let VnmN = response.data.vehicl;
-            setVehi(VnmN);
+            let Vehicle_data = response.data.vehicl;
+            setVehi(Vehicle_data);
 
         });
     }
@@ -63,13 +65,13 @@ const EditPmnt = () => {
     // -------- /Part for Name
 
     const update = () => {
-        axios.post('http://localhost/fleet/backend/Payment_c/saveUpdate', {
-            id: inExid,
+        axios.post('http://fleet.prantiksoft.com/backend/Payment_c/saveUpdate', {
+            id: ScarD,
             vehicle_id: carID,
-            trans_date: Vdate,
-            amount: amnt,
-            remarks: rmRk,
-            type: typ_e
+            trans_date: dates,
+            amount: amount,
+            remarks: remark,
+            type: type
         }, {
             headers: {
                 'Content-Type': 'application/json',
@@ -78,11 +80,11 @@ const EditPmnt = () => {
         }).then(function (response) {
             let data = response.data;
             setmsg(data.msg);
-            setVehiNM(data.msg);
-            // seteDate('');
             navigate("/payment");
+
         })
     }
+
 
 
     return (
@@ -125,7 +127,7 @@ const EditPmnt = () => {
                                                         <td>
                                                             <select className='form-control' onChange={(e) => setcarID(e.target.value)} value={carID} >
                                                                 {
-                                                                    Vnm.map((d, i) => {
+                                                                    Vehicl_name.map((d, i) => {
                                                                         return (
                                                                             <option value={d.id} key={i}  > {d.name} </option>
                                                                         )
@@ -137,32 +139,36 @@ const EditPmnt = () => {
                                                     </tr>
                                                     <tr>
                                                         <th>Transjection date</th>
-                                                        <td><input type='date' className='form-control' onChange={(e) => seteDate(e.target.value)} value={Vdate} /></td>
+                                                        <td>
+                                                            <input type="text" className="form-control" value={dates} disabled />
+                                                            <input type='date' className='form-control' onChange={(e) => seteDate(e.target.value)} />
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <th>Amount</th>
-                                                        <td><input type='number' className='form-control' onChange={(e) => setAmnt(e.target.value)} value={amnt} /></td>
+                                                        <td><input type='number' className='form-control' onChange={(e) => setAmount(e.target.value)} value={amount} /></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Remarks</th>
-                                                        <td><input type='text' className='form-control' onChange={(e) => setRmrk(e.target.value)} value={rmRk} /></td>
+                                                        <td><input type='text' className='form-control' onChange={(e) => setRemark(e.target.value)} value={remark} /></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Type</th>
                                                         <td>
-                                                            {(typ_e == 'income') ? <>
-                                                                <input type="radio" id="html" name="fav_language" value={'income'} onChange={(e) => setType(e.target.value)} checked /><label >Income</label> </> : <> <input type="radio" id="html" name="fav_language" value={'income'} onChange={(e) => setType(e.target.value)} /><label >Income</label> </>}
+                                                            {(type === 'income') ? <>
+                                                                <input type="radio" id="html" name="fav_language" value={'income'} onChange={(e) => setType(e.target.value)} checked /><label >Income</label>
+                                                            </> : <>
+                                                                <input type="radio" id="html" name="fav_language" value={'income'} onChange={(e) => setType(e.target.value)} /><label >Income</label>
+                                                            </>}
 
-                                                            {(typ_e == 'expense')
-                                                                ? <>
-                                                                    <input type="radio" id="html" name="fav_language" value={'expense'} onChange={(e) => setType(e.target.value)} checked />
-                                                                    <label >Expense</label><br />
-                                                                </>
-                                                                :
-                                                                <><input type="radio" id="html" name="fav_language" value={'expense'} onChange={(e) => setType(e.target.value)} /><label >Expense</label><br />
-                                                                </>}
+                                                            {(type === 'expense') ? <>
+                                                                <input type="radio" id="html" name="fav_language" value={'expense'} onChange={(e) => setType(e.target.value)} checked />
+                                                                <label >Expense</label><br />
+                                                            </> : <>
+                                                                <input type="radio" id="html" name="fav_language" value={'expense'} onChange={(e) => setType(e.target.value)} /><label >Expense</label><br />
+                                                            </>}
 
-
+                                                            {(type === 'expense') ? <>To change Click On <strong>Income</strong> </> : <> To change Click On <strong> Expense</strong> </>}
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -190,4 +196,3 @@ const EditPmnt = () => {
     );
 
 }
-export default EditPmnt;

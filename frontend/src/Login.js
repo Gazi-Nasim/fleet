@@ -8,7 +8,7 @@ const Login = () => {
      const [error, seterror] = useState('Sign in to start your session');
      const navigate=useNavigate();
      const login=()=>{
-        axios.post('http://localhost/fleet/backend/Login', {
+        axios.post('http://fleet.prantiksoft.com/backend/Login', {
         email: mail,
         password: pass
       },{
@@ -17,8 +17,11 @@ const Login = () => {
         }
       }).then(function (response) {
         let data=response.data;
+        console.log(data);
         if(data.status==true){
           localStorage.setItem('token',data.token)
+          localStorage.setItem("name",data.name)
+          
           navigate("/dashboard");
         }else{
           seterror('Something went wrong!')
@@ -64,7 +67,7 @@ const Login = () => {
                                         </div>
                                     </div>
                                     <div className="col-4">
-                                        <button type="submit" className="btn btn-primary btn-block" onClick={login}>LogIn</button>
+                                        <button type="submit" className="btn btn-primary btn-block" onClick={login}>Sign In</button>
                                     </div>
                                 </div>
                         </div>

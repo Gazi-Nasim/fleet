@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer'
 import Menu from '../Menu'
 
-const Driver = () => {
+export default function () {
   const [admin, setadmin] = useState([]);
+  // const [role, setrole] = useState('');
   const [name, setname] = useState('');
   const [phone, setphone] = useState('');
   const [age, setage] = useState('');
@@ -24,9 +25,11 @@ const Driver = () => {
 
   const save = () => {
     const formdata = new FormData();
+    // formdata.append('admin_id',admin_id);
     formdata.append('name', name);
     formdata.append('email', email);
     formdata.append('password', password);
+    // formdata.append('role',role);
     formdata.append('phone', phone);
     formdata.append('age', age);
     formdata.append('license_no', license_no);
@@ -38,13 +41,16 @@ const Driver = () => {
     formdata.append('status', status);
     formdata.append('photo', photo);
     formdata.append('documents', documents);
-    fetch("http://localhost/fleet/backend/Driver_controller/adddriver", {
+    fetch("http://fleet.prantiksoft.com/backend/Driver_controller/adddriver", {
       method: 'POST',
       body: formdata
     },
     )
       .then((response) => response.json())
       .then((data) => console.log(data));
+    // let data = response.data;
+    //   setmsg(data.msg)
+    // setrole('')
     setname('')
     setphone('')
     setage('')
@@ -62,9 +68,62 @@ const Driver = () => {
     setTimeout(() => setmsg(''), 5000)
 
 
+    // axios.post('http://fleet.prantiksoft.com/backend/Driver_controller/adddriver', {
+    //   role: role,
+    //   name: name,
+    //   phone: phone,
+    //   age: age,
+    //   email: email,
+    //   password: password,
+    //   license_no: license_no,
+    //   license_expire_date: license_expire_date,
+    //   experience: experience,
+    //   joining_date: joining_date,
+    //   reference: reference,
+    //   address: address,
+    //   status: status,
+    //   photo: photo,
+    //   documents: documents,
+    // }, 
 
+    // {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': localStorage.getItem('token')
+    //   }
+    // }).then(function (response) {
+    //   let data = response.data;
+    //   setmsg(data.msg)
+    //   setrole('')
+    //   setname('')
+    //   setphone('')
+    //   setage('')
+    //   setemail('')
+    //   setpassword('')
+    //   setlicense_no('')
+    //   setlicense_expire_date('')
+    //   setexprience('')
+    //   setjoiningdate('')
+    //   setreference('')
+    //   setaddress('')
+    //   setstatus('')
+    //   setphoto('')
+    //   setdocument('')
+    //   setTimeout(() => setmsg(''), 5000)
+    // })
   };
-
+  // const getdata = () => {
+  //   axios({
+  //     method: 'get',
+  //     url: 'http://fleet.prantiksoft.com/backend/Driver_controller/adminlist',
+  //     responseType: 'json'
+  //   }).then(function (response) {
+  //     setadmin(response.data.admin)
+  //   });
+  // }
+  // useEffect(() => {
+  //   getdata()
+  // }, []);
 
   return (
     <div className="hold-transition sidebar-mini">
@@ -103,6 +162,15 @@ const Driver = () => {
                       <div className="card-body">
                         <div className="row">
                           <div className="col-6">
+                            {/* <div className="form-group">
+                                <label for="exampleInputEmail1">Role</label>
+                                <select className="form-control" id="exampleInputEmail1" onChange={(e) => setrole(e.target.value)}>
+                                  <option value="">Select Role</option>
+                                  <option value='admin'>Admin</option>
+                                  <option value='driver'>Deriver</option>
+                                  <option value='customer'>Customer</option>
+                                </select>
+                              </div> */}
                             <div className="form-group">
                               <label class="form-label">Driver Name<span class="form-required"></span></label>
                               <input type="text" name="name" className="form-control" id="exampleInputEmail1" required placeholder="Enter Name" onChange={(e) => setname(e.target.value)} value={name} />
@@ -166,6 +234,9 @@ const Driver = () => {
                                   <input type="file" name="photo" className="custom-file-input" id="exampleInputFile" onChange={(e) => setphoto(e.target.files[0])} />
                                   <label className="custom-file-label" for="exampleInputFile">Choose file</label>
                                 </div>
+                                {/* <div className="input-group-append">
+                                    <span className="input-group-text">Upload</span>
+                                  </div> */}
                               </div>
                             </div>
                           </div>
@@ -177,6 +248,9 @@ const Driver = () => {
                                   <input type="file" name="document" className="custom-file-input" id="exampleInputFile" onChange={(e) => setdocument(e.target.files[0])} />
                                   <label className="custom-file-label" for="exampleInputFile">Choose file</label>
                                 </div>
+                                {/* <div className="input-group-append">
+                                    <span className="input-group-text">Upload</span>
+                                  </div> */}
                               </div>
                             </div>
                             <div className="form-group">
@@ -210,7 +284,44 @@ const Driver = () => {
 
               </div>
 
-
+              {/* <div className="card card-primary card-outline">
+              <div className="card-header">
+                <h5 className="m-0">derivers List</h5>
+              </div>
+              <div className="card-body">
+                <table className="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>SL</th>
+                            <th>Admin ID</th>
+                            <th>Phone</th>
+                            <th>Age</th>
+                            <th>License Number</th>
+                            <th>Address</th>
+                            <th>Photo</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {data.map((d,i)=>
+                        <tr key={i}>
+                            <td>{i+1}</td>
+                            <td>{d.admin_id}</td>
+                            <td>{d.phone}</td>
+                            <td>{d.age}</td>
+                            <td>{d.license_no}</td>
+                            <td>{d.address}</td>
+                            <td><img src="" width="100" height="80"/></td>
+                            <td>
+                            <button onClick={()=>editdriver(d.id)} className="btn btn-primary">Edit</button>
+                            <button onClick={()=>deletedriver(d.id)}  className="btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        )}
+                    </tbody>
+                </table>
+              </div>
+            </div> */}
             </div>
           </div>
 
@@ -221,4 +332,3 @@ const Driver = () => {
     </div>
   )
 }
-export default Driver;

@@ -5,33 +5,33 @@ class User_model extends CI_Model
     {
         return $this->db->get('admin')->result();
     }
-
     public function saveuser($data)
     {
-        return $this->db->insert('admin', $data);
+        return $this->db->insert('admin',$data);
     }
-
-    
-
     public function deleteuser($id)
     {
-        $this->db->where('id', $id)->delete('admin');
+        $this->db->where('id',$id)->delete('admin');
     }
-
     public function edituser($id)
     {
-        return $this->db->where('id', $id)->get('admin')->row();
+        return $this->db->where('id',$id)->get('admin')->row();
+    }
+    public function updateuser($data)
+    {
+        $this->db->where('id',$data['id'])->update('admin',$data);
     }
 
-    public function AuthLog($data)
+    public function carLogin($data)
     {
-        return $this->db->where('email', $data['email'])
-            ->where('password', $data['password'])
-            ->get('admin');
+        $this->db->where(['email' => $data['email']]);
+        $this->db->where(['password' => md5($data['password'])]);
+        $query = $this->db->get('admin');
+        return $query->row();
     }
 
     public function save_user($data)
     {
-        return $this->db->insert('admin',$data);
+        return $this->db->insert('admin', $data);
     }
 }

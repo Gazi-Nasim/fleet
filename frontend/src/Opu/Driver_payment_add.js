@@ -4,31 +4,36 @@ import Footer from '../Footer'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Driver_payment_add = () => {
+export default function Driver_payment_add() {
     const [drivers, setdrivers] = useState([{ name: '', id: '' }]);
     const [driverid, setdriverid] = useState('');
     const [transdate, settransdate] = useState('');
     const [amount, setamount] = useState('');
     const [remarks, setremarks] = useState('');
     const navigate = useNavigate();
-    useEffect(() => {
+    useEffect(() =>
+    {
         let token = localStorage.getItem('token')
-        if (token == null) {
+        if (token == null)
+        {
             navigate("/");
         };
         getDriver();
     }, []);
-    const getDriver = () => {
+    const getDriver = () =>
+    {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Opu/getDriver',
+            url: 'http://fleet.prantiksoft.com/backend/Opu/getDriver',
             responseType: 'json'
-        }).then(function (response) {
+        }).then(function (response)
+        {
             setdrivers(response.data.driver)
         });
     };
-    const save = () => {
-        axios.post('http://localhost/fleet/backend/Opu/adddriverpayment', {
+    const save = () =>
+    {
+        axios.post('http://fleet.prantiksoft.com/backend/Opu/adddriverpayment', {
             driver_id: driverid,
             trans_date: transdate,
             amount: amount,
@@ -38,7 +43,8 @@ const Driver_payment_add = () => {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')
             }
-        }).then(function (response) {
+        }).then(function (response)
+        {
             let data = response.data;
             setdriverid('')
             settransdate('')
@@ -81,39 +87,68 @@ const Driver_payment_add = () => {
                                             <div className="card-body">
                                                 <div className=''>
                                                     <div className=''>
+                                                        {/* <div className="form-group">
+                                                            <label>Customer</label>
+                                                            
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label>Vehicle</label>
+                                                            
+                                                        </div> */}
                                                         <div className="form-group">
                                                             <label>Driver</label>
-                                                            <select className='form-control' onChange={(e) => setdriverid(e.target.value)}>
+                                                            <select className='form-control' onChange={ (e) => setdriverid(e.target.value) }>
                                                                 <option value=''>Select Driver</option>
 
-                                                                {drivers.map((d, i) => {
+                                                                { drivers.map((d, i) =>
+                                                                {
                                                                     return (
-                                                                        <option value={d.id} key={i}>{d.name}</option>
+                                                                        <option value={ d.id } key={ i }>{ d.name }</option>
                                                                     )
-                                                                })}
+                                                                }) }
                                                             </select>
                                                         </div>
+                                                        {/* <div className="form-group">
+                                                            <label>Type</label><br />
+                                                            
+                                                        </div> */}
                                                     </div>
                                                     <div className=''>
                                                         <div className="form-group">
                                                             <label>Transportation Date</label>
-                                                            <input type="date" className="form-control" onChange={(e) => settransdate(e.target.value)} value={transdate} />
+                                                            <input type="date" className="form-control" onChange={ (e) => settransdate(e.target.value) } value={ transdate }/>
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Amount</label>
-                                                            <input type="text" className="form-control" onChange={(e) => setamount(e.target.value)} value={amount} />
+                                                            <input type="text" className="form-control" onChange={ (e) => setamount(e.target.value) } value={ amount }/>
                                                         </div>
                                                         <div className="form-group">
                                                             <label>Remarks</label>
-                                                            <textarea className="form-control" rows="3" onChange={(e) => setremarks(e.target.value)} value={remarks} placeholder="Enter ..."></textarea>
+                                                            <textarea className="form-control" rows="3" onChange={ (e) => setremarks(e.target.value) } value={ remarks } placeholder="Enter ..."></textarea>
                                                         </div>
+                                                        {/* <div className="form-group">
+                                                            <label>End Date</label>
+                                                            
+                                                        </div> */}
                                                     </div>
                                                     <div className=''>
+                                                        {/* <div className="form-group">
+                                                            <label>Approx. Km</label>
+                                                            
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label>Amount</label>
+                                                            
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label>Status</label>
+                                                            
+                                                        </div> */}
 
                                                         {/* <!-- /.card-body --> */}
 
                                                         <div className="card-footer">
-                                                            <button type="submit" className="btn btn-primary" onClick={save}>Submit</button>
+                                                            <button type="submit" className="btn btn-primary" onClick={ save }>Submit</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -135,5 +170,3 @@ const Driver_payment_add = () => {
         </>
     )
 }
-
-export default Driver_payment_add;

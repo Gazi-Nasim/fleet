@@ -11,7 +11,7 @@ export default function Maintenancelist() {
       const getMaintenance = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Maintenance/getMaintenance',
+            url: 'http://fleet.prantiksoft.com/backend/Maintenance/getMaintenance',
             responseType: 'json'
         }).then(function (response) {
             setList(response.data.maintenance);
@@ -28,7 +28,7 @@ export default function Maintenancelist() {
         }
         //------delete---------
         const deletemaintenance = (id) => {
-            axios.post('http://localhost/fleet/backend/Maintenance/deletemaintenance', {
+            axios.post('http://fleet.prantiksoft.com/backend/Maintenance/deletemaintenance', {
                 id: id
             },
                 {
@@ -52,7 +52,7 @@ export default function Maintenancelist() {
                 <div className="container-fluid">
                     <div className="row mb-2 align-items-center">
                         <div className="col-sm-6 ">
-                            <h1 className="m-0 ">Add Maintenance</h1>
+                            <h1 className="m-0 ">Maintenance List</h1>
                         </div>
                         <div className="col-sm-6">
                             <ol className="breadcrumb float-sm-right">
@@ -99,8 +99,8 @@ export default function Maintenancelist() {
                                                     <td>{d.cost}</td>
                                                     <td>{d.status}</td>
                                                     <td>
-                                                        <button onClick={() => deletemaintenance(d.id)} className='btn btn-sm btn-danger'>Delete</button>
-                                                        <button onClick={() => edit_maintenance(d.id)} className='btn btn-sm btn-primary'>Edit</button>
+                                                        <button onClick={() => deletemaintenance(d.id)} className='btn btn-xs btn-danger'>Delete</button>&nbsp;
+                                                        <button onClick={() => edit_maintenance(d.id)} className='btn btn-xs btn-primary'>Edit</button>
                                                     </td>
                                                 </tr>
                                             )}

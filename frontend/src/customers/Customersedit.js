@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Footer from '../Footer';
 import Menu from '../Menu';
-
 const Customersedit = () => {
     const navigate = useNavigate()
     const p = useParams();
@@ -18,7 +17,7 @@ const Customersedit = () => {
     const [msg, setmsg] = useState('');
 
     useEffect(() => {
-        axios.post('http://localhost/fleet/backend/Customers/editcustomers', {
+        axios.post('http://fleet.prantiksoft.com/backend/Customers/editcustomers', {
             id: p.id
         }, {
             headers: {
@@ -27,20 +26,22 @@ const Customersedit = () => {
             }
         }).then(function (response) {
             let data = response.data;
-            setadmin(data.role);
-            setname(data.user.name);
-            setphone(data.user.phone);
-            setemail(data.user.email);
-            setpassword(data.user.password);
-            setaddress(data.user.address);
-            setstatus(data.user.status);
+            setadmin(data.role)
+            // setrole(data.user.role)
+            setname(data.user.name)
+            setphone(data.user.phone)
+            setemail(data.user.email)
+            setpassword(data.user.password)
+            setaddress(data.user.address)
+            setstatus(data.user.status)
+            console.log(data)
         })
     }, []);
 
     const getCustomer = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Customers/getCustomer',
+            url: 'http://fleet.prantiksoft.com/backend/Customers/getCustomer',
             responseType: 'json'
         }).then(function (response) {
             setadmin(response.data.admin)
@@ -51,8 +52,9 @@ const Customersedit = () => {
     }, []);
 
     const save = () => {
-        axios.post('http://localhost/fleet/backend/Customers/updatecustomers', {
+        axios.post('http://fleet.prantiksoft.com/backend/Customers/updatecustomers', {
             admin: admin,
+            // role: role,
             name: name,
             phone: phone,
             email: email,
@@ -68,7 +70,7 @@ const Customersedit = () => {
         }).then(function (response) {
             let data = response.data;
             setmsg(data.msg)
-            setTimeout(() => navigate('/customers_management'))
+            setTimeout(() => navigate('/customers_management') )
 
         })
     }
@@ -106,6 +108,19 @@ const Customersedit = () => {
                                             <h4>{msg}</h4>
                                             <table className='table table-bordered'>
                                                 <tbody>
+                                                    {/* <tr>
+                                                        <th>Role</th>
+                                                        <td>
+                                                            <select onChange={(e) => setrole(e.target.value)} >
+                                                                <option value=''>Select Role</option>
+
+                                                                <option value='admin'>Admin</option>
+                                                                <option value='users'>Users</option>
+                                                                <option value='drivers'>Drivers</option>
+
+                                                            </select>
+                                                        </td>
+                                                    </tr> */}
                                                     <tr>
                                                         <th>Name</th>
                                                         <td><input type='text' className='form-control' onChange={(e) => setname(e.target.value)} value={name} /></td>

@@ -14,6 +14,7 @@ class Payment_c extends CI_Controller
         header('Access-Control-Allow-Headers: *');
         header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
         $this->load->model('Payment_model');
+        // $this->load->model('IncomeExpense_model');
     }
 
     public function VehicleName()
@@ -22,6 +23,8 @@ class Payment_c extends CI_Controller
         $data = $this->Payment_model->getVehi();
         $this->output->set_content_type('application/json')->set_output(json_encode(['vehicl' => $data, 'status' => true]));
     }
+
+
 
     public function pmntGet()
     {
@@ -74,7 +77,7 @@ class Payment_c extends CI_Controller
         }
     }
 
-    
+
     public function deletPmnt()
     {
 
@@ -143,4 +146,28 @@ class Payment_c extends CI_Controller
             $this->output->set_content_type('application/json')->set_output(json_encode(['msg' => $ex->getMessage(), 'status' => false]));
         }
     }
+
+
+    // public function SrcVehicle_Report()
+    // {
+
+    //     $header = apache_request_headers();
+    //     $token = $header['Authorization'];
+    //     try {
+    //         $decoded = JWT::decode($token, new Key($this->config->item('encryption_key'), 'HS256'));
+    //         // Your section starts here
+
+    //         $data = json_decode(file_get_contents("php://input"), true);
+    //         $d = $this->Payment_model->getVehicle_Report($data['id']);
+    //         $this->output->set_content_type('application/json')->set_output(json_encode(['income_expense' => $d, 'status' => true]));
+
+    //         // Your section ends here
+    //     } catch (ExpiredException $e) {
+    //         $this->output->set_content_type('application/json')->set_output(json_encode(['msg' => $e->getMessage(), 'status' => false]));
+    //     } catch (SignatureInvalidException $s) {
+    //         $this->output->set_content_type('application/json')->set_output(json_encode(['msg' => $s->getMessage(), 'status' => false]));
+    //     } catch (Exception $ex) {
+    //         $this->output->set_content_type('application/json')->set_output(json_encode(['msg' => $ex->getMessage(), 'status' => false]));
+    //     }
+    // }
 }

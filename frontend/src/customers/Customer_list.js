@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Footer from '../Footer';
 import Menu from '../Menu';
 
-const Customer_list=()=> {
+export default function Customer_list() {
 
     const navigate = useNavigate();
     const [data, setList] = useState([]);
@@ -23,7 +23,7 @@ const Customer_list=()=> {
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Customers',
+            url: 'http://fleet.prantiksoft.com/backend/Customers',
             responseType: 'json'
         }).then(function (response) {
             setList(response.data.list)
@@ -37,7 +37,7 @@ const Customer_list=()=> {
     const getCustomer = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Customers/getCustomer',
+            url: 'http://fleet.prantiksoft.com/backend/Customers/getCustomer',
             responseType: 'json'
         }).then(function (response) {
             setadmin(response.data.admin)
@@ -49,7 +49,7 @@ const Customer_list=()=> {
 
     const save = () => {
 
-        axios.post('http://localhost/fleet/backend/Customers/addcustomers', {
+        axios.post('http://fleet.prantiksoft.com/backend/Customers/addcustomers', {
             role: role,
             name: name,
             phone: phone,
@@ -79,7 +79,7 @@ const Customer_list=()=> {
 
 
     const deletecustomers = (id) => {
-        axios.post('http://localhost/fleet/backend/Customers/deletecustomers', {
+        axios.post('http://fleet.prantiksoft.com/backend/Customers/deletecustomers', {
             id: id
         }, {
             headers: {
@@ -175,4 +175,3 @@ const Customer_list=()=> {
         </div>
     )
 }
-export default Customer_list;

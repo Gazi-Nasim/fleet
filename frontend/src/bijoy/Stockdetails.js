@@ -10,7 +10,7 @@ const Stockdetails = () => {
     const [endDate, setendDate] = useState('');
     const [partdetails, setpartdetails] = useState([]);
     useEffect(() => {
-        axios.post('http://localhost/fleet/backend/Parts/stockDetails', {
+        axios.post('http://fleet.prantiksoft.com/backend/Parts/stockDetails', {
             id: p.id,
             startDate: startDate,
             endDate: endDate,
@@ -27,7 +27,7 @@ const Stockdetails = () => {
         })
     }, []);
     const search = () => {
-        axios.post('http://localhost/fleet/backend/Parts/stockDetails', {
+        axios.post('http://fleet.prantiksoft.com/backend/Parts/stockDetails', {
             id: p.id,
             startDate: startDate,
             endDate: endDate,

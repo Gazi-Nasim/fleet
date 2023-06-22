@@ -18,24 +18,20 @@ const Parts_stock_in = () => {
     const [date, setdate] = useState('');
     const [msg, setmsg] = useState('');
 
-
-
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Partsin/get_parts',
+            url: 'http://fleet.prantiksoft.com/backend/Partsin/get_parts',
             responseType: 'json'
         }).then(function (response) {
             setparts(response.data.list)
-            // console.log(response.data.list)
-
         });
     }
 
     const getpartsName = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Partsin/get_partsName',
+            url: 'http://fleet.prantiksoft.com/backend/Partsin/get_partsName',
             responseType: 'json'
         }).then(function (response) {
             setpartsName(response.data.Namelist)
@@ -50,7 +46,7 @@ const Parts_stock_in = () => {
 
     const save = () => {
 
-        axios.post('http://localhost/fleet/backend/Partsin/get_stock_in', {
+        axios.post('http://fleet.prantiksoft.com/backend/Partsin/get_stock_in', {
 
             parts_id: id,
             price: price,
@@ -80,7 +76,7 @@ const Parts_stock_in = () => {
     }
 
     const deleteParts = (d) => {
-        axios.post('http://localhost/fleet/backend/Partsin/deleteGet_stock_in', {
+        axios.post('http://fleet.prantiksoft.com/backend/Partsin/deleteGet_stock_in', {
             id: d
         }, {
             headers: {
@@ -96,7 +92,7 @@ const Parts_stock_in = () => {
 
 
     // const deleteuser = (id) => {
-    //     axios.post('http://localhost/fleet/backend/User/deleteuser', {
+    //     axios.post('http://fleet.prantiksoft.com/backend/User/deleteuser', {
     //         id: id
     //     }, {
     //         headers: {

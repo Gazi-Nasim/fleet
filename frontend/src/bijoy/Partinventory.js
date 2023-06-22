@@ -12,7 +12,7 @@ const Partinventory = () => {
     const getparts = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Parts/get_stock',
+            url: 'http://fleet.prantiksoft.com/backend/Parts/get_stock',
             responseType: 'json'
         }).then(function (response) {
             // setstocklist(response.data.stock_out)

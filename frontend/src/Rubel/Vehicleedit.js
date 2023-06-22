@@ -7,7 +7,7 @@ import Menu from "../Menu";
 import Footer from "../Footer";
 import { type } from "@testing-library/user-event/dist/type";
 
-const Vehicleedit = () => {
+export default function Vehicleedit() {
   const navigate = useNavigate();
   const d = useParams();
   const [selectedFile, setselectedFile] = useState("");
@@ -29,7 +29,7 @@ const Vehicleedit = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://localhost/fleet/backend/Rubel/gettype",
+      url: "http://fleet.prantiksoft.com/backend/Rubel/gettype",
       responseType: "json",
     }).then(function (response) {
       settitle(response.data.title);
@@ -37,7 +37,7 @@ const Vehicleedit = () => {
 
     axios
       .post(
-        "http://localhost/fleet/backend/Rubel/editvehicle",
+        "http://fleet.prantiksoft.com/backend/Rubel/editvehicle",
         {
           id: d.id,
         },
@@ -71,24 +71,24 @@ const Vehicleedit = () => {
   //-------update fetch use---------
   const update = () => {
 
-    const formdata = new FormData();
-    formdata.append('photo', selectedFile);
-    formdata.append('documents', selecteddoct);
+    const formdata=new FormData();
+    formdata.append('photo',selectedFile);
+    formdata.append('documents',selecteddoct);
     // formdata.append('id',id);
 
-    formdata.append('type_id', type_id);
-    formdata.append('registration_no', registration_no);
-    formdata.append('name', name);
-    formdata.append('model', model);
-    formdata.append('chesis_no', chesis_no);
-    formdata.append('manufacturer', manufacture);
-    formdata.append('color', color);
-    formdata.append('expire_date', expire_date);
+    formdata.append('type_id',type_id);
+    formdata.append('registration_no',registration_no);
+    formdata.append('name',name);
+    formdata.append('model',model);
+    formdata.append('chesis_no',chesis_no);
+    formdata.append('manufacturer',manufacture);
+    formdata.append('color',color);
+    formdata.append('expire_date',expire_date);
     // formdata.append('documents',documents);
-
-    fetch('http://localhost/fleet/backend/Rubel/updatevehicle/' + d.id, {
-      method: 'POST',
-      body: formdata
+ 
+    fetch('http://fleet.prantiksoft.com/backend/Rubel/updatevehicle/'+d.id,{
+        method:'POST',
+        body:formdata
 
     }).then((response) => response.json())
       .then((data) => {
@@ -101,14 +101,49 @@ const Vehicleedit = () => {
         setmanufacture('')
         setcolor('')
         setexpire_date('')
+        // setphoto('')
+        // setdocuments('')
         setselectedFile('')
         setselecteddoct('')
-
-        setTimeout(() => navigate('/vehicle'), 3000)
+        
+        setTimeout(()=>navigate('/vehicle'), 3000)
       });
-  }
+    }
 
   //-------update axios use---------
+
+  //   const update = () => {
+  //   axios
+  //     .post(
+  //       "http://fleet.prantiksoft.com/backend/Rubel/updatevehicle",
+  //       {
+  //         // title: title,
+  //         type_id: type_id,
+  //         registration_no: registration_no,
+  //         name: name,
+  //         model: model,
+  //         chesis_no: chesis_no,
+  //         manufacture: manufacture,
+  //         color: color,
+  //         expire_date: expire_date,
+  //         photo: photo,
+  //         documents: documents,
+  //         id: d.id,
+  //       },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: localStorage.getItem("token"),
+  //         },
+  //       }
+  //     )
+  //     .then(function (response) {
+  //       let data = response.data;
+  //       setmsg(data.msg);
+  //       setTimeout(()=>navigate('/vehicle'), 3000)
+  //     });
+
+  // };
 
   return (
     <>
@@ -145,6 +180,20 @@ const Vehicleedit = () => {
                       <div className="card-body">
                         <table className="table table-bordered">
                           <tbody>
+                            {/* <tr>
+                                <th>Vehicle_type</th>
+                                <td>
+                                    <select className='form-control' onChange={(e)=>settype_id(e.target.value)} value={type_id}>
+                                        <option value="">Select type</option>
+                                        {title.map((d,i)=>{
+                                            return(
+                                                <option value={d.id} key={i}>{d.title}</option>
+                                            )
+                                        })}
+                                        
+                                    </select>
+                                </td>
+                            </tr> */}
                             <tr>
                               <th>
                                 Id
@@ -161,7 +210,7 @@ const Vehicleedit = () => {
                                 <select
                                   className="form-control f"
                                   onChange={(e) => settype_id(e.target.value)}
-
+                                  
                                   value={type_id}
                                 >
                                   <option value="">Select type</option>
@@ -271,8 +320,9 @@ const Vehicleedit = () => {
                             </tr>
                             <tr>
                               <td>
+                                {/* <img src={`http://fleet.prantiksoft.com/backend/uploads/${selectedFile}`} /> */}
                                 <img
-                                  src={`http://localhost/fleet/backend/uploads/${photo}`}
+                                  src={`http://fleet.prantiksoft.com/backend/uploads/${photo}`}
                                   style={{ width: "250px", height: "200px" }}
                                 />
                               </td>
@@ -291,8 +341,9 @@ const Vehicleedit = () => {
                             </tr>
                             <tr>
                               <td>
+                                {/* <img src={`http://fleet.prantiksoft.com/backend/uploads/${selectedFile}`} /> */}
                                 <img
-                                  src={`http://localhost/fleet/backend/uploads/${documents}`}
+                                  src={`http://fleet.prantiksoft.com/backend/uploads/${documents}`}
                                   style={{ width: "250px", height: "200px" }}
                                 />
                               </td>
@@ -322,4 +373,3 @@ const Vehicleedit = () => {
     </>
   );
 }
-export default Vehicleedit;

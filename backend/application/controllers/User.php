@@ -95,25 +95,4 @@ class User extends CI_Controller
             $this->output->set_content_type('application/json')->set_output(json_encode(['msg'=>$ex->getMessage(),'status'=>false]));
         }
     }
-
-    public function saveCustomer()
-	{
-		$data=json_decode(file_get_contents("php://input"),true);
-        $data['password']=md5($data['password']);
-        try{
-            
-			if ($data['role']=='user') {
-				$d=$this->User_model->save_user($data);
-            $this->output->set_content_type('application/json')->set_output(json_encode(['msg'=>'Successfully Inserted!','status'=>true]));
-			
-			}
-            
-        }catch(ExpiredException $e){
-            $this->output->set_content_type('application/json')->set_output(json_encode(['msg'=>$e->getMessage(),'status'=>false]));
-        }catch(SignatureInvalidException $s){
-            $this->output->set_content_type('application/json')->set_output(json_encode(['msg'=>$s->getMessage(),'status'=>false]));
-        }catch(Exception $ex){
-            $this->output->set_content_type('application/json')->set_output(json_encode(['msg'=>$ex->getMessage(),'status'=>false]));
-        }
-	}
 }

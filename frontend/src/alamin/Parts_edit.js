@@ -11,7 +11,7 @@ const Parts_edit = () => {
     const [status, setstatus] = useState('');
     const [msg, setmsg] = useState('');
     useEffect(() => {
-        axios.post('http://localhost/fleet/backend/Partsmanage/edit_parts', {
+        axios.post('http://fleet.prantiksoft.com/backend/Partsmanage/edit_parts', {
             id: p.id
         }, {
             headers: {
@@ -28,7 +28,7 @@ const Parts_edit = () => {
     }, []);
 
     const save = () => {
-        axios.post('http://localhost/fleet/backend/Partsmanage/update_parts', {
+        axios.post('http://fleet.prantiksoft.com/backend/Partsmanage/update_parts', {
             name: name,
             details: details,
             status: status,

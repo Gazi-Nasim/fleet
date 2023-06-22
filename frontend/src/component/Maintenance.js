@@ -53,7 +53,7 @@ export default function Maintenance() {
         //-----vehicle----------
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Maintenance/getVehicle',
+            url: 'http://fleet.prantiksoft.com/backend/Maintenance/getVehicle',
             responseType: 'json'
         }).then(function (response) {
             setVehicle(response.data.vehicle)
@@ -62,7 +62,7 @@ export default function Maintenance() {
         ////----------Vendor-------
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Maintenance/getVendor',
+            url: 'http://fleet.prantiksoft.com/backend/Maintenance/getVendor',
             responseType: 'json'
         }).then(function (response) {
             setVendor(response.data.vendor)
@@ -70,7 +70,7 @@ export default function Maintenance() {
         //-----Parts in Maintenance-------
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Maintenance/getParts',
+            url: 'http://fleet.prantiksoft.com/backend/Maintenance/getParts',
             responseType: 'json'
         }).then(function (response) {
             setPartsname(response.data.parts)
@@ -81,7 +81,7 @@ export default function Maintenance() {
     const getMaintenance = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Maintenance/getMaintenance',
+            url: 'http://fleet.prantiksoft.com/backend/Maintenance/getMaintenance',
             responseType: 'json'
         }).then(function (response) {
             setList(response.data.maintenance)
@@ -107,7 +107,7 @@ export default function Maintenance() {
     //----------Add/insert----------
     const save = () => {
 
-        axios.post('http://localhost/fleet/backend/Maintenance/addmaintenance', {
+        axios.post('http://fleet.prantiksoft.com/backend/Maintenance/addmaintenance', {
             vendor_id: vendorid,
             vehicle_id: vehicleid,
             start_date: sdate,
@@ -147,7 +147,7 @@ export default function Maintenance() {
     }
     //------delete---------
     const deletemaintenance = (id) => {
-        axios.post('http://localhost/fleet/backend/Maintenance/deletemaintenance', {
+        axios.post('http://fleet.prantiksoft.com/backend/Maintenance/deletemaintenance', {
             id: id
         },
             {

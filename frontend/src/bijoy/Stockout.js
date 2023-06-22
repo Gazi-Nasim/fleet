@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Stockout = () => {
-    const navigate = useNavigate();
+    const navigate=useNavigate();
     const [id, setid] = useState('');
     const [qty, setqty] = useState('');
     const [date, setdate] = useState('');
@@ -17,7 +17,7 @@ const Stockout = () => {
     const getdata = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Parts/get_parts',
+            url: 'http://fleet.prantiksoft.com/backend/Parts/get_parts',
             responseType: 'json'
         }).then(function (response) {
             setparts(response.data.list)
@@ -30,8 +30,8 @@ const Stockout = () => {
 
     const save = () => {
 
-        axios.post('http://localhost/fleet/backend/Parts/add_stock_out', {
-
+        axios.post('http://fleet.prantiksoft.com/backend/Parts/add_stock_out', {
+            
             parts_id: id,
             qty: qty,
             out_date: date
@@ -56,7 +56,7 @@ const Stockout = () => {
     const getparts = () => {
         axios({
             method: 'get',
-            url: 'http://localhost/fleet/backend/Parts/get_stock_out',
+            url: 'http://fleet.prantiksoft.com/backend/Parts/get_stock_out',
             responseType: 'json'
         }).then(function (response) {
             setstocklist(response.data.stock_out)
@@ -67,8 +67,8 @@ const Stockout = () => {
         getparts()
     }, []);
 
-    const deleteparts = (id) => {
-        axios.post('http://localhost/fleet/backend/Parts/deleteparts', {
+    const deleteparts=(id)=>{
+        axios.post('http://fleet.prantiksoft.com/backend/Parts/deleteparts', {
             id: id
         }, {
             headers: {
@@ -81,8 +81,8 @@ const Stockout = () => {
             getparts()
         })
     }
-    const editparts = (id) => {
-        navigate('/editparts/' + id)
+    const editparts=(id)=>{
+        navigate('/editparts/'+id)
     }
     return (
         <div className="hold-transition sidebar-mini">
@@ -164,7 +164,7 @@ const Stockout = () => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {stocklist.map((d, i) =>
+                                                    {stocklist.map((d,i) =>
                                                         <tr key={i}>
                                                             <td>{i + 1}</td>
                                                             <td>{d.name}</td>
@@ -172,7 +172,7 @@ const Stockout = () => {
                                                             <td>{d.out_date}</td>
                                                             <td>
                                                                 <i className="fa-sharp fa-solid fa-trash btn btn-danger btn-sm" onClick={() => deleteparts(d.stockId)}></i>
-                                                                <i className="fa-sharp fa-solid fa-pen-to-square btn btn-success btn-sm" style={{ marginLeft: '15px' }} onClick={() => editparts(d.stockId)}></i>
+                                                                <i className="fa-sharp fa-solid fa-pen-to-square btn btn-success btn-sm" style={{marginLeft: '15px'}} onClick={() => editparts(d.stockId)}></i>
                                                             </td>
                                                         </tr>
                                                     )}
