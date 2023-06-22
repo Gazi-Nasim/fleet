@@ -1,4 +1,4 @@
-<p> Put the fleet folder in your server and open the frontend folder and then run the software using the CLI command "npm start" </p>
+<p align="left"> Put the <strong>fleet</strong> folder in your server and open the frontend folder and then run the software using the CLI command <strong>npm start</strong> </p>
 <h1 align="center">Hi 👋,My name is Gazi Nasim Uddin</h1>
 <h3 align="center">A passionate full-stack developer from Bangladesh</h3>
 
